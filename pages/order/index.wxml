@@ -1,0 +1,62 @@
+<!-- navigator -->
+<nav-bar title="全部订单" backbtn="true"></nav-bar>
+
+
+<scroll-view scroll-x="true" class="order-tabs fixed-top fdefc" style="top: {{navH}}px;">
+  <view wx:for="{{statusType}}" wx:key="{{key}}"  class="{{currentType == item.id ? 'active':''}}" bindtap='statusTap' data-id="{{item.id}}">
+    {{item.name}}
+  </view>
+</scroll-view>
+
+<scroll-view scroll-y="true" class="orders border-box" style="margin-top: {{navH}}px; height: calc(100vh - {{navH}}px)">
+  <view style='height: 100rpx'></view>
+  <block wx:if="{{orderList.length}}">
+    <view class="order whiteBg"  wx:for="{{orderList}}" wx:key="{{key}}" wx:if="{{item.type!=4}}">
+      <view class="order-header fsc solid-bot">
+        <view>订单号：{{item.orderNumber}}</view>
+        <view class="{{(item.status==-1 || item.status==4) ? '':'red'}}">{{item.statusStr}}</view>
+      </view>
+      <navigator url="/pages/orderDel/index?orderid={{item.id}}" class="order-body solid-bot">
+        <view class="order-item fdefc" wx:for="{{item}}" wx:key="idx" wx:for-item="good" wx:if="{{good.quantity}}">
+          <image src="{{good.image}}"></image>
+          <view>
+            <view class="item-title">{{good.name}}</view>
+            <view class="fsc item-case">
+              <view>
+                <view wx:if="{{good.spec}}">规格：{{good.spec}}；</view>
+                <view>数量：×{{good.quantity}}</view>
+              </view>
+              <view wx:if="{{item.type!=3}}">￥{{good.price}}</view>
+              <view wx:else>积分 {{good.price}}</view>
+            </view>
+          </view>
+        </view>
+        
+      </navigator>
+
+      <view class="order-total clear">
+        <view >
+          共{{itemTotal[index]}}件商品 合计：
+          <block wx:if="{{item.type!=3}}">
+            ￥ {{item.amountReal}}
+          </block>
+          <block wx:else>
+           积分 {{item.amountReal}}
+          </block>
+        </view>
+        <block wx:if="{{item.status==3}}" >
+          <view class="fr" bindtap="toPayTap" data-id="{{item.id}}" data-money="{{item.amountReal}}">立即支付</view>
+          <view class="fr cancle" bindtap='cancelOrderTap' data-id="{{item.id}}">取消</view>
+        </block>
+        <navigator url="/pages/cart/index" class="fr" wx:else>再次购买</navigator>
+      </view>
+
+    </view>
+  </block>
+
+  <view class="empty" wx:else>
+    <image src="/images/empty.png" class="img-full"></image>
+    <view>您还没有相关订单哦</view>
+  </view>
+
+</scroll-view>

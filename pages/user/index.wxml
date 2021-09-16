@@ -1,0 +1,105 @@
+<!-- navigator -->
+<nav-bar title="会员中心" backbtn=""></nav-bar>
+
+
+<scroll-view scroll-y="true" class="box" style="margin-top: {{navH}}px; height: calc(100vh - {{navH}}px - {{tabH}})">
+  <view class="container bg-full-x" style="background-image: url(https://img.foshanhaozhan.com/wxapp/user-bg.png)">
+    <!-- /user -->
+    <view class="user fdefc">
+      <image src="{{userInfo.userpic}}" class="user-img"></image>
+      <view class="user-info">
+        <view class="fdefc">
+          {{userInfo.nickname}}
+          <view class="text-center">普卡会员</view>
+        </view>
+        <view wx:if="{{userInfo.telephone}}">{{userInfo.telephone}}</view>
+        <button wx:else open-type='getPhoneNumber' bindgetphonenumber="getPhoneNumber">授权手机号</button>
+      </view>
+    </view>
+    <!-- user -->
+
+    <!-- numder -->
+    <view class="numder fcc box-shodow">
+      <view class="numder-li" bindtap='onShowModal' data-type="recharge">
+        <view>{{userInfo.predeposit}}</view>
+        <view>钱包 · 充值</view>
+      </view>
+      <navigator url="/pages/myScore/index?points={{userInfo.points}}" class="numder-li">
+        <view>{{userInfo.points}}</view>
+        <view>积分</view>
+      </navigator>
+    </view>
+    <!-- /numder -->
+
+    <!-- links -->
+    <view class="links-list fsw box-shodow">
+      <navigator url='/pages/userMsg/index' class="link-li" wx:if="{{userInfo.telephone}}">
+        <view>
+          <image src="/images/user.png" mode="scaleToFill" class="img-full"></image>
+        </view>
+        <view>会员信息</view>
+      </navigator>
+      <view bindtap='onShowModal' data-type="getTel"  class="link-li" wx:else>
+        <view>
+          <image src="/images/user.png" mode="scaleToFill" class="img-full"></image>
+        </view>
+        <view>会员信息</view>
+      </view>
+      <navigator url='/pages/order/index' class="link-li">
+        <view>
+          <image src="/images/classify.png" mode="scaleToFill" class="img-full"></image>
+        </view>
+        <view>全部订单</view>
+      </navigator>
+      <navigator url='/pages/myPintuan/index' class="link-li">
+        <view>
+          <image src="/images/group.png" mode="scaleToFill" class="img-full"></image>
+        </view>
+        <view>我的拼团</view>
+      </navigator>
+      <navigator url='/pages/site-manage/index' class="link-li">
+        <view>
+          <image src="/images/site.png" mode="aspectFit" class="img-full"></image>
+        </view>
+        <view>地址管理</view>
+      </navigator>
+    </view>
+    <!-- /numder -->
+
+
+
+  </view>
+</scroll-view>
+
+<import src="/component/footer/footer.wxml" />
+<template is="tabBar" data="{{tabBar:bindData.tabBar}}" />
+
+<!-- 授权手机号 -->
+<base-modal id="baseModal">
+  <view slot="close" class="modal-close">
+    <image src="/images/x.png"></image>
+  </view>
+  <view slot="body" class='modal-body'>
+    <view class="logo">
+      <image src="/images/logo.png"></image>
+    </view>
+    <button open-type='getPhoneNumber' bindgetphonenumber="getPhoneNumber">授权手机号</button>
+  </view>
+</base-modal>
+
+
+<!-- 充值 -->
+<base-modal id="easyModal">
+  <view slot="header" class="modal-header text-hidden">充值金额</view>
+  <view slot="close" class="modal-close">
+    <image src="/images/x.png"></image>
+  </view>
+  <view slot="body" class='modal-body'>
+    <form bindsubmit="recharge">
+      <view class="input">
+        <input placeholder='请输入充值金额' type='number' bindinput='money' value="{{inputVal}}"  focus='{{true}}'></input>
+      </view>
+      <button formType="submit">确定充值</button>
+    </form>
+  </view>
+</base-modal>

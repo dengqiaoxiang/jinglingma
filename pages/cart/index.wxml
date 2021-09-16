@@ -1,0 +1,112 @@
+<!-- navigator -->
+<nav-bar title="购物车" backbtn="true"></nav-bar>
+
+
+<scroll-view scroll-y="true" class="box orders" style="margin-top: {{navH}}px; height: calc(100vh - {{navH}}px)">
+  <block wx:if="{{cartsdata.length}}">
+    <view class="add-site">
+      <view wx:if="{{siteArr.length}}" catchtap='onShowModal'>
+        <block wx:for="{{siteArr}}" wx:key="{{key}}" wx:if="{{siteId == item.address_id}}">
+          <image src="/images/order-site.png"></image><text>{{item.address}}</text>
+          <image class="angle" src="/images/arrowr.png"></image>
+        </block>
+      </view>
+      <navigator wx:else url='/pages/addAddress/index'>+ 点击添加收货地址</navigator>
+    </view>
+    <block wx:for="{{cartsdata}}" wx:key="{{idx}}" wx:for-index="idx" wx:if="{{item[2]}}">
+      <view class="order whiteBg">
+        <view class="order-header clear solid-bot">
+          <icon class="fl" type='{{shopStatus[idx] ? "success":"circle"}}' bindtap="storeselected" 
+          data-index="{{idx}}" data-storeid="{{item[0]}}"></icon>
+          <navigator url="/pages/classify/index" class="fl">{{item[1]}}</navigator>
+          <text class="fr" bindtap="deletestore" data-storeid="{{item[0]}}" data-index="{{idx}}">删除</text>
+        </view>
+        <view class="order-body solid-bot">
+          <view class="order-item fdefc" wx:for="{{item}}" wx:key="{{index}}" wx:for-item="liItem" wx:if="{{index>1}}">
+            <icon type="{{item[index].select ? 'success':'circle'}}" bindtap="goodsselected" data-index="{{index}}" data-select-index="{{idx}}" data-cartid='{{item[index].cart_id}}' data-storeid="{{item[0]}}" />
+            <image src="{{item[index].image}}"></image>
+            <view>
+              <view class="item-title">{{item[index].name}}</view>
+              <view class="item-case">
+                <view wx:if="{{item[index].spec_name}}">规格：{{item[index].spec_name}}；</view>
+                <view>
+                  ￥{{item[index].price}}
+                  <!-- <text>￥20.00</text> -->
+                </view>
+              </view>
+              <view class="product-num fsc">
+                <image src="/images/creduce.png" bindtap="minusCount" data-index="{{index}}" data-select-index="{{idx}}" data-cartid='{{item[index].cart_id}}' data-storeid="{{item[0]}}">
+                </image>
+                <input type="number" value="{{item[index].number}}"></input>
+                <image src="/images/cadd.png" bindtap="addCount" data-index="{{index}}" data-select-index="{{idx}}" data-cartid='{{item[index].cart_id}}' data-storeid="{{item[0]}}"></image>
+              </view>
+            </view>
+          </view>
+        </view>
+
+        <view class="order-total fsc">
+          <view>商品合计：
+            <text wx:if="{{shopnum[idx]>0}}">￥{{shopnum[idx]}}</text>
+          </view>
+
+          <view bindtap='toPay' class="topay active" wx:if="{{shopnum[idx] > 0 && siteArr.length}}" 
+          data-storeid="{{item[0]}}">
+            去结算
+          </view>
+          <view class="topay" data-price="{{shopnum[idx]}}" bindtap='tip' wx:else>去结算</view>
+        </view>
+      </view>
+    </block>
+    <!-- <view class='allselected'>
+      <view>
+        <icon type="{{allselected ? 'success':'circle'}}" bindtap="tapallallprices" />
+        <text>全选</text>
+      </view>
+      <view>
+        <view class='allprices'>合计
+          <text>￥{{allprices}}</text>
+        </view>
+        <view bindtap='toPay' class="topay active" wx:if="{{allprices>0 && siteArr.length}}">
+          去结算
+        </view>
+        <view class="topay" bindtap='tip' wx:else>去结算</view>
+      </view>
+    </view> -->
+  </block>
+  <view wx:else class="cart-empty" style="height: calc(100vh - {{navH}}px)">
+    <image src="/images/empty-cart.png"></image>
+    <view>购物车空空哒</view>
+    <view>赶紧来填满购物车吧！</view>
+    <navigator url="/pages/index/index" open-type="navigateBack" class="to-index-btn">
+      去逛逛
+    </navigator>
+  </view>
+
+  <base-modal id="baseModal">
+  <view slot="header" class="modal-header text-hidden">请选择收货地址</view>
+  <view slot="close" class="modal-close">
+    <image src="/images/x.png"></image>
+  </view>            
+  <view slot="body" class='modal-body'>
+     <scroll-view scroll-y="true" class="address-list border-box" >
+      <view class="address-li" wx:for="{{siteArr}}" wx:key="{{key}}">
+        <view id="{{item.address_id}}" bindtap='checked'>
+          <view class="address-info">{{item.address}}</view>
+          <view class="user-info fdefc">
+            {{item.name}}
+            <text> {{item.telephone}}</text>
+          </view>
+        </view>
+        <image class="check" src="/images/checked.png" wx:if="{{siteId == item.address_id}}"></image>
+        <view class="edit fcc">
+          <navigator url="/pages/addAddress/index?id={{item.address_id}}">编辑</navigator>
+        </view>
+      </view>
+    </scroll-view>
+
+    <navigator url='/pages/addAddress/index'>新建地址</navigator>    
+  </view>
+</base-modal>
+</scroll-view>
+
+

@@ -1,0 +1,31 @@
+<!-- navigator -->
+<nav-bar title="地址管理" backbtn="true"></nav-bar>
+
+<scroll-view scroll-y="true" class="box" style="margin-top: {{navH}}px; height: calc(100vh - {{navH}}px - {{botH}})">
+    <view class="address-list border-box">
+      <view class="address-li"  wx:for="{{siteArr}}" wx:key="{{key}}">
+        <view id="{{item.address_id}}" class="site-msg">
+          <view class="address-info">{{item.address}}</view>
+          <view class="user-info fdefc">
+            {{item.name}}
+            <text> {{item.telephone}}</text>
+          </view>
+        </view>
+        <view class="operate">
+          <view class="del" bindtap='del' id="{{item.address_id}}"  data-index="{{index}}">
+            <image src="/images/delect.png"></image>
+            删除
+          </view>
+          <view class="edit" bindtap='edit' id="{{item.address_id}}">
+            <image  src="/images/cadd.png"></image>
+            编辑
+          </view>      
+        </view>
+      </view>
+    </view>
+
+</scroll-view>
+<navigator url="/pages/addAddress/index" class="add-site fixed-bot whiteBg">
+  新增地址 +
+</navigator>
+

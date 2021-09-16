@@ -1,0 +1,7 @@
+/* pages/index/index.wxss */
+.top {
+    height: 20vh;
+}
+.pull-down-load {
+    height: 80vh;
+}

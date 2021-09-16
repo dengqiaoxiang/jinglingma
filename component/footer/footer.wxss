@@ -1,0 +1,59 @@
+/* pages/template/template.wxss */
+.icon{
+  width: 100%;
+  height: 50rpx;
+}
+.tabBar{
+  width:100%;
+  position: fixed;
+  bottom:0;
+  padding: 16rpx 0 10rpx;
+  height: 120rpx;
+  margin-left:-4rpx;
+  background:#fff;
+  font-size: 26rpx;
+  color:#717d72;
+  box-shadow: 0 0 23rpx 0 rgba(97, 217, 107, 0.2);
+  box-sizing: border-box;
+}
+
+.tabBar-item{
+  float:left;
+  width:20%;
+  text-align: center;
+  overflow: hidden;
+}
+.tabBar-item:nth-child(3){
+  position: relative;
+  height: 71rpx;
+  color: #fff;
+  font-size: 24rpx;
+  overflow: visible;
+}
+.tabBar-item:nth-child(3) navigator{
+  position: absolute;
+  top: -55rpx;
+  width: 138rpx;
+	height: 138rpx;
+	background: linear-gradient(90deg, #61d96b 0%, #04f0c3 100%), 
+	  linear-gradient(#0ec597, #0ec597);
+	box-shadow: 0 3rpx 16rpx 0 rgba(97, 217, 107, 0.81);
+  border-radius: 50%;
+}
+.tabBar-item:nth-child(3) .icon{
+  width: 62rpx;
+	height: 62rpx;
+  margin-top: 16rpx;
+}
+
+
+
+/*当前字体颜色*/
+.tabBartext{
+  color: #61d96b;
+}
+.tabBar-item:nth-child(3) .tabBartext{color: #fff;}
+.navigator-hover {
+  background-color: transparent;
+  opacity: 1;
+}

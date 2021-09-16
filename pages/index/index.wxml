@@ -1,0 +1,90 @@
+<!-- navigator -->
+<nav-bar title="{{mallname}}" backbtn=""></nav-bar>
+
+
+<scroll-view scroll-y="true" class="box" style="margin-top: {{navH}}px; height: calc(100vh - {{navH}}px - {{tabH}})">
+  <!--form-->
+  <view class="bg-full-x" style="background-image: url(https://img.foshanhaozhan.com/wxapp/user-bg.png)">
+	<navigator url="/pages/search/index" class="search">
+     <view class="fdefc">
+    	 	<image src="/images/search-icon.png"></image>
+        <text>水果/蔬菜/肉...</text>
+      </view>
+	</navigator>
+	<!--form-->
+	<!--swiper-->
+  <view class="swiper">
+    <view class="swiper-container">
+          <swiper class="swiper_box" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="true" bindchange="swiperchange">
+              <block wx:for="{{banners}}" wx:key="{{key}}">
+                <swiper-item>
+                  <image src="{{item.image}}" class="slide-image" />
+                </swiper-item>
+              </block>
+          </swiper>
+          <view class="fcc dots">  
+            <block wx:for="{{banners}}" wx:key="unique">  
+                <view class="dot{{index == swiperCurrent ? ' active' : ''}}"></view>  
+            </block>  
+          </view>  
+    </view>
+   </view>
+	<!--swiper-->
+   </view>
+
+  <!--slogan-->
+  <view class="fdefc slogan" wx:if='{{userInfo}}'>
+    <view class="slogan-img">
+      <image src="{{userInfo.userpic?userInfo.userpic:userInfo.avatarUrl}}"></image>
+    </view>
+    <view class="slogan-txt text-hidden" >
+      {{userInfo.nickname?userInfo.nickname:userInfo.nickName}}
+    </view>
+  </view>
+  <!--/slogan-->
+  <!-- list -->
+  <view class="links">
+    <navigator class="link-item fdefc" url="/pages/classify/index" open-type="redirect">
+      <view class="link-img">
+        <image mode="aspectFit" src="/images/right-icon.png" ></image>
+      </view>
+      <view class="link-txt">
+        <view class="txt-b">现在下单</view>
+        <view>还可以自提哦</view>
+      </view>
+    </navigator>
+    <navigator class="link-item fdefc" url="/pages/order/index">
+      <view class="link-img">
+        <image mode="aspectFit" src="/images/diamond.png" ></image>
+      </view>
+      <view class="link-txt">
+        <view class="txt-b">我的订单</view>
+        <view>查看会员订单信息</view>
+      </view>
+    </navigator>
+    <navigator class="link-item fdefc" url="/pages/cart/index">
+      <view class="link-img">
+        <image mode="aspectFit" src="/images/idx-cart.png" ></image>
+      </view>
+      <view class="link-txt">
+        <view class="txt-b">购物车</view>
+        <view>立即购买，送货上门</view>
+      </view>
+    </navigator>
+  </view>
+  <!-- /list -->
+
+  
+  
+  
+  
+</scroll-view>
+
+
+<import src="/component/footer/footer.wxml"/>
+<template is="tabBar" data="{{tabBar:bindData.tabBar}}"/>
+  
+  
+
+ 
+

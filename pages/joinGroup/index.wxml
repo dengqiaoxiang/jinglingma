@@ -1,0 +1,143 @@
+<!-- navigator -->
+<nav-bar title="参加拼团" backbtn="true"></nav-bar>
+<!-- /navigator -->
+
+<scroll-view scroll-y="true" class="box" style="margin-top: {{navH}}px; height: calc(100vh - {{navH}}px)">
+  <!-- product-introz -->
+  <view class="h30 baseBg"></view>
+  <view class="group-img pads30 solid-bot fdef">
+    <image src="{{goods.image}}"></image>
+    <view class="product-del">
+
+      <view class="group clear">
+        <view class="del-title text-hidden fl">{{goods.name}}</view>
+        <view class="buyNum fr">{{goodinfo.sale_count}}人已团</view>
+      </view>
+      <view class="groupNum">{{goods.pt_tuan_num}}人团</view>
+
+      <view class="product-price fdefc">
+        <view>￥0.01</view>
+        <view>￥20.00</view>
+      </view>
+    </view>
+  </view>
+  <view class="fsc serve-item pads30" wx:if="{{keyword.length}}">
+    <view class="fcc" wx:for="{{keyword}}" wx:key="kw">
+      <image src="/images/serve-checked.png"></image>
+      {{item}}
+    </view>
+  </view>
+
+
+  <view class="h30 baseBg"></view>
+
+  <!-- grouping -->
+  <view class="grouping pads30 container" wx:if="{{pt_status=='pt_ing'}}">
+    <view class="grouping-title">
+      还差
+      <text>{{pintuan.tuan_num-pintuan.pay_num}}</text>人成团
+    </view>
+    <!-- <view class="residue-time fcc">
+      剩余<view>23</view>:<view>23</view>: <view>48</view>   结束
+    </view> -->
+    <view class="residue-time fcc">
+      剩余{{wxTimer}}结束
+    </view>
+    <view class="zz">马上分享，邀请好友成团</view>
+    <!-- <view class="group-share fcc" bindtap='share' open-type="share">邀请好友参团</view> -->
+    <button class="group-share fcc" open-type='share'>邀请好友参团</button>
+    <button class="group-share fcc" bindtap="bindGuiGeTap">立即参团</button>
+  </view>
+  <!-- 拼团失败 -->
+  <view class="grouping pads30 container" wx:if="{{pt_status=='fail'}}">
+    <view class="grouping-title">
+      还差
+      <text>{{pintuan.tuan_num-pintuan.pay_num}}</text>人成团，拼团失败
+    </view>
+    <!-- <view class="residue-time fcc">
+      剩余<view>23</view>:<view>23</view>: <view>48</view>   结束
+    </view> -->
+    <view class="residue-time fcc">
+      已结束，拼团失败
+    </view>
+  </view>
+  <!-- 结束 -->
+  <view class="grouping pads30 container" wx:if="{{pt_status=='success'}}">
+    <view class="grouping-title">
+      组团成功！对于诸位大侠的相助，团长感激涕零
+    </view>
+    <!-- <view class="residue-time fcc">
+      剩余<view>23</view>:<view>23</view>: <view>48</view>   结束
+    </view> -->
+    <view class="residue-time fcc">
+      已结束，该团已满员
+    </view>
+  </view>
+
+  <view class="h40 baseBg"></view>
+
+  <view class="group-people" wx:if="{{pt_list}}">
+    <view class="peoples fcc solid-bot">
+      <block wx:for-items="{{pt_list}}" wx:key="{{index}}">
+        <view wx:if="{{item.is_leader==1}}">
+          <image src="{{item.userpic}}"></image>
+          <view>团长</view>
+        </view>
+        <view wx:if="{{item.is_leader==0}}">
+          <image src="{{item.userpic}}"></image>
+        </view>
+      </block>
+    </view>
+    <view class="group-time fsc pads30">
+      <view>参团时间</view>
+      <view>{{pintuan.start_time}}</view>
+    </view>
+  </view>
+
+  <view class="h30 baseBg"></view>
+  <view class="groupRule">
+    开团或参团-人满发货-人不满退款
+  </view>
+  <view class="baseBg" style='height: 50rpx;'></view>
+
+</scroll-view>
+
+<view class="show-popup" hidden="{{hideShopPopup}}">
+  <view class="popup-mask" bindtap="closePopupTap"></view>
+  <view class="popup-contents">
+    <view class="pop-goods-info">
+      <view class="pop-img-box">
+        <image src="{{selectImage}}" class="goods-thumbnail" />
+      </view>
+      <view class="pop-goods-des">
+        <view class="pop-goods-title">{{goods.name}}</view>
+        <view class="pop-goods-price">¥ {{price}}</view>
+      </view>
+      <view class="pop-goods-close" bindtap="closePopupTap"></view>
+    </view>
+    <view class="size-label-box">
+      <block wx:for="{{spec}}" wx:for-item="property" wx:for-index="idx" wx:key="id">
+        <view class="label">{{property.name}}</view>
+        <view class="label-item-box">
+          <view class="label-item {{spec_val.active ? 'active' : '' }}" wx:for="{{property.value}}" wx:for-item="spec_val" wx:key="id" bindtap="labelItemTap" data-specid="{{idx}}" data-specvaluename="{{spec_val.name}}" data-specvalueidx="{{index}}" data-specimage="{{spec_val.image}}">
+            {{spec_val.name}}
+          </view>
+        </view>
+      </block>
+    </view>
+    <view class="buy-num-box">
+      <view class="num-label">购买数量</view>
+      <view class="num-box">
+        <view class="num-jian {{buyNumber == buyNumMin ? 'hui': ''}}" bindtap="numJianTap">-</view>
+        <view class="num-input">
+          <input type="number" value="{{buyNumber}}" disabled/>
+        </view>
+        <view class="num-jia {{buyNumber== buyNumMax ? 'hui': ''}}" bindtap="numJiaTap">+</view>
+      </view>
+    </view>
+
+    <view class="popup-join-btn" bindtap="buy">
+      参团购买
+    </view>
+  </view>
+</view>

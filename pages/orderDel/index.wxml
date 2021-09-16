@@ -1,0 +1,101 @@
+<!-- navigator -->
+<nav-bar title="订单详情" backbtn="true"></nav-bar>
+
+<scroll-view scroll-y="true" class="box orders" style="margin-top: {{navH}}px; height: calc(100vh - {{navH}}px)">
+  
+  <view class="order-top">
+    <view class="status">{{orderDetail.orderInfo.statusStr}}</view>
+    <view class="userInfo posCen-left">
+      <view class="fsc">
+        <view>{{orderDetail.logistics.shipping_name}}</view>
+        <view>{{orderDetail.logistics.shipping_tel}}</view>
+      </view>
+      <view class="fdefc">
+        <image src="/images/order-site.png"></image>
+        <text>{{orderDetail.logistics.address}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="order whiteBg">
+    <view class="order-header fsc solid-bot">
+      <view>订单号：{{orderDetail.orderInfo.order_no}}</view>
+      <view class="{{(item.status==-1 || item.status==4) ? '':'red'}}">{{orderDetail.orderInfo.statusStr}}</view>
+    </view>
+    <view class="order-body solid-bot">
+
+      <view class="order-item fdefc" wx:for="{{orderDetail.goods}}" wx:key="key">
+        <image src="{{item.image}}"></image>
+        <view>
+          <view class="item-title">{{item.name}}</view>
+          <view class="fsc item-case">
+            <view>
+              <view>规格：{{item.spec}} ;</view>
+              <view>数量：×{{item.quantity}}</view>
+            </view>
+            <view wx:if="{{orderDetail.orderInfo.type == 3}}">{{item.price * item.quantity}}</view>
+            <view wx:else>￥{{item.price * item.quantity}}</view>
+          </view>
+        </view>
+      </view>
+    
+    </view>
+  
+    <view class="order-total clear">
+      <block wx:if="{{orderDetail.orderInfo.type == 3}}">
+        <view class="fsc">
+          <view>商品积分</view>
+          <view>积分{{orderDetail.orderInfo.total}}</view>
+        </view>
+        <view class="fsc" wx:if="{{orderDetail.orderInfo.bonus_card_deduct}}">
+          <view>优惠积分</view>
+          <view>-积分{{orderDetail.orderInfo.bonus_card_deduct}}</view>
+        </view>
+        <view class="fsc actual">
+          <view>实付积分</view>
+          <view>积分{{orderDetail.orderInfo.pay_fee - orderDetail.orderInfo.bonus_card_deduct}}</view>
+        </view>
+      </block>
+      <block wx:else>
+        <view class="fsc">
+          <view>商品金额</view>
+          <view>￥{{orderDetail.orderInfo.total}}</view>
+        </view>
+        <view class="fsc" wx:if="{{orderDetail.orderInfo.bonus_card_deduct}}">
+          <view>优惠券</view>
+          <view>-￥{{orderDetail.orderInfo.bonus_card_deduct}}</view>
+        </view>
+        <view class="fsc actual">
+          <view>实付金额</view>
+          <view>￥{{orderDetail.orderInfo.pay_fee - orderDetail.orderInfo.bonus_card_deduct}}</view>
+        </view>
+      </block>
+    </view>
+
+  </view>
+
+  <view class="order-case whiteBg">
+    <view class="fsc">
+      <view>订单号</view>
+      <view>{{orderDetail.orderInfo.order_no}}</view>
+    </view>
+    <view class="fsc">
+      <view>下单时间</view>
+      <view>{{orderDetail.orderInfo.dateAdd}}</view>
+    </view>
+    <view class="fsc">
+      <view>付款方式</view>
+      <view>微信支付</view>
+    </view>
+  </view>
+
+  <view class="order-remark whiteBg fdefc">
+    <view>订单备注</view>
+    <view>{{orderDetail.orderInfo.comment}}</view>
+  </view>
+
+ 
+
+  
+</scroll-view>
+

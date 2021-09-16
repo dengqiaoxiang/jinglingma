@@ -1,0 +1,124 @@
+@import "/component/footer/footer.wxss";
+.address-search{
+  padding: 11rpx 0 17rpx;
+  background: linear-gradient(90deg, 
+		#61d96b 0%, 
+		#04f0c3 100%), 
+	linear-gradient(
+		#ff2200, 
+		#ff2200);
+}
+.address{
+  width: 530rpx;
+	height: 52rpx;
+  color: #fff;
+  font-size: 26rpx;
+	background-color: rgba(0,0,0,.5);
+	border-radius: 26rpx;
+}
+.address>text{
+  width: 300rpx;
+  margin: 0 5rpx;
+	font-size: 26rpx;
+	color: #ffffff;
+}
+.address>image:first-child{
+  width: 22rpx;
+	height: 30rpx;
+}
+.address>image:last-child{
+  width: 22rpx;
+  height: 15rpx;
+}
+.search{
+  position: relative;
+  width: 144rpx;
+	height: 52rpx;
+  padding-left: 73rpx;
+  margin-left: 16rpx;
+  background-color: #ffffff;
+	box-shadow: 0 0 1rpx 0	rgba(195, 255, 227, 0.31), inset 0 1rpx 3rpx 0 
+		rgba(4, 10, 34, 0.6);
+	border-radius: 26rpx;
+  box-sizing: border-box;
+}
+.search image{
+  position: absolute;
+  top: 15rpx;
+  left: 32rpx;
+  width: 24rpx;
+	height: 24rpx;
+}
+.search text{font-size: 26rpx;}
+
+.group-list{padding: 118rpx 0 50rpx;}
+.group-li{
+  position: relative;
+  width: 690rpx;
+	height: 424rpx;
+  margin-bottom: 38rpx;
+  box-shadow: 0 0 17rpx 0	rgba(96, 217, 108, 0.31);
+  border-radius: 29rpx;
+}
+.group-li:last-child{
+  margin-bottom: 0;
+}
+.group-tip{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 128rpx;
+	height: 38rpx;
+  font-size: 26rpx;
+  text-align: center;
+  color: #ffffff;
+  background-color: #ffa42d;
+	border-radius: 29rpx 0 29rpx 0;
+}
+.group-img{	height: 270rpx;}
+.group-img image{
+  width: 277rpx;
+	height: 196rpx;
+}
+.group-title{
+  margin: 30rpx 0 20rpx;
+  padding: 0 27rpx;
+  font-size: 34rpx;
+}
+.group-price{
+  padding-left: 30rpx;
+}
+.group-price text{
+  font-size: 36rpx;
+  color: #ffa42d;
+}
+.group-price text:last-child{
+  margin-left: 30rpx;
+  font-size: 24rpx;
+  color: #333;
+  text-decoration: line-through;
+}
+.group-num{
+  position: absolute;
+  right: 14rpx;
+  bottom: 20rpx;
+}
+.group-num button{
+  width: 148rpx;
+	height: 40rpx;
+  line-height: 40rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #ffffff;
+  background-color: #61d96b;
+	border-radius: 20rpx;
+}
+.group-num view{
+  margin-top: 10rpx;
+  font-size: 24rpx;
+  color: #959595;
+}
+
+.nopintuan{
+  padding-top: 118rpx;
+}

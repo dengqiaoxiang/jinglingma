@@ -1,0 +1,141 @@
+/**index.wxss**/
+page{background-color: #f6f6f6;}
+.address-search{
+  position: fixed;
+  left: 0;
+  width: 100%;
+  padding: 12rpx 30rpx;
+  background: #fff;
+  border-bottom: 1rpx solid #ededed;
+  z-index: 10
+}
+.address-search>picker{width: 21%}
+.address>text{
+  margin: 0 10rpx;
+	font-size: 26rpx;
+  line-height: 1;
+}
+.address>image:first-child{
+  width: 22rpx;
+	height: 30rpx;
+}
+.address>image:last-child{
+  width: 18rpx;
+  height: 10rpx;
+}
+
+.search{
+  position: relative;
+  width: 78%;
+	height: 56rpx;
+	background-color: #f6f6f6;
+  padding-left: 56rpx;
+  margin-left: 10rpx;
+	border-radius: 10rpx;
+  box-sizing: border-box;
+}
+.search image{
+  position: absolute;
+  top: 16rpx;
+  left: 22rpx;
+  width: 24rpx;
+	height: 24rpx;
+}
+.search input{width: 491rpx;font-size: 26rpx;}
+.search .close{
+  left: inherit;
+  right: 30rpx;
+  z-index: 20;
+}
+
+.item{
+  width: 100%;
+  padding: 16rpx 30rpx;
+  font-size: 26rpx;
+	color: #a0a0a0;
+  box-sizing: border-box;
+}
+.item>image{
+  width: 24rpx;
+	height: 24rpx;
+  margin-right: 10rpx;
+}
+
+.current{
+  width: 100%;
+  padding: 23rpx 30rpx;
+  font-size: 32rpx;
+	color: #333;
+  background-color: #fff;
+}
+.current>view:first-child{width: 76%;}
+.current .fcc{
+  color: #ffb400;
+  font-size: 26rpx;
+}
+.current .fcc image{
+  width: 24rpx;
+	height: 24rpx;
+  margin-right: 10rpx;
+}
+.address-list{ padding: 0 56rpx;}
+.address-list>view{
+  position: relative;
+  width: 100%;
+  padding: 30rpx 0;
+  border-bottom: 1px solid #ededed;
+}
+.address-list>view:last-child{border-bottom: none;}
+.address-li>view{width: 80%}
+.address-li .address-info{font-size: 32rpx;}
+.address-li .user-info{
+  margin-top: 4rpx;
+  font-size: 26rpx;
+	color: #666;
+}
+.address-li .user-info text{
+  margin-left: 23rpx;
+}
+.address-li>image{
+   position: absolute;
+   width: 37rpx;
+	 height: 37rpx;
+   z-index: 10;
+}
+.address-li .check{
+  top: 0;
+  left: 0;
+}
+.address-li .del{
+  right: 80rpx;
+  bottom: 20rpx;
+}
+.address-li .edit{
+  right: 20rpx;
+  bottom: 20rpx;
+}
+.near{
+  padding: 0 56rpx;
+  margin-bottom: 30rpx;
+}
+.near>view{
+  padding: 20rpx 0;
+  font-size: 28rpx;
+  color: #666;
+  border-bottom: 1px solid #ededed;
+}
+.near>view>view{
+
+  font-size: 20rpx;
+}
+.near>view:last-child{border-bottom: none;}
+
+.add-site{
+  padding: 28rpx 0;
+  text-align: center;
+  font-size: 32rpx;
+  color: #61d96b;
+  border-top: 1px solid #ededed;
+}
+
+

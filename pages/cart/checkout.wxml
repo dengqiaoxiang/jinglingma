@@ -1,0 +1,185 @@
+<!-- <view class="container">
+     <form bindsubmit="createOrder" report-submit="true">
+     <view class="address-box">
+        <view class="add-address" hidden="{{curAddressData}}">
+            <view class="title" bindtap="addAddress">新增收货地址</view>
+        </view>
+        <view class="show-address" hidden="{{!curAddressData}}" bindtap="selectAddress">
+            <view class="name-tel">{{curAddressData.name}}  {{curAddressData.telephone}}</view>
+            <view class="addr-text">{{curAddressData.address}}</view>
+        </view>
+     </view>
+     <view wx:for="{{goodsList}}" wx:key="{{index}}">
+
+         <view  class="goods-list">
+            <view class="list-title">{{item.shop_name}}</view>
+            <view wx:for="{{item.goods}}" wx:for-item="good" wx:key="g">
+                <view wx:if="{{good.name}}" class="a-goods">
+                    <view class="img-box">
+                        <image src="{{good.image}}" class="img" />
+                    </view>
+                    <view class="text-box">
+                        <view class="arow arow01">
+                            <view class="goods-name">{{good.name}}</view>
+                            <view class="goods-price">¥ {{good.price}}</view>
+                        </view>
+                        <view class="arow">
+                            <view class="goods-label" wx:if="{{good.spec_name}}">{{good.spec_name}}</view>
+                            <view class="goods-num">x {{good.quantity}}</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+         </view>
+
+         <view class="peisong-way">
+            <view class="row-box">
+                <view class="row-label">配送方式</view>
+                <view class="right-text" wx:if="{{item.yun_fee > 0}}">快递</view>
+                <view class="right-text" wx:if="{{item.yun_fee == 0}}">包邮</view>
+            </view>
+            <view class="row-box">
+                <view class="row-label">备注</view>
+                <view class="right-text">
+                    <input name="remark[{{item.shop_id}}]" type="text" class="liuyan" placeholder="如需备注请输入" />
+                </view>
+            </view>
+         </view>
+         
+         
+         <view class="goods-info">            
+            <view class="row-box" wx:if="{{item.yun_fee > 0}}">
+                <view class="row-label">运费</view>
+                <view class="right-text">¥ {{item.yun_fee}}</view>
+            </view>
+            <view class="row-box" wx:if="{{item.bonus_card}}">
+                <view class="row-label">优惠券</view>
+                <view class="right-text">{{item.bonus_card}}</view>
+            </view>
+            <view class="row-box">
+                <view class="row-label">小计</view>
+                <view class="right-text">¥ {{item.all_money}}</view>
+            </view>
+         </view>
+     </view>
+
+     <view class="jiesuan-box">
+        <view class="left-price">
+            <view class="total">合计：¥ {{allPrice}}</view>
+        </view>
+        <button class="to-pay-btn" formType="submit">提交订单</button>
+    </view>
+    </form>
+</view> -->
+<!-- navigator -->
+<nav-bar title="确认订单" backbtn="true"></nav-bar>
+
+
+<scroll-view scroll-y="true" class="box orders" style="margin-top: {{navH}}px; height: calc(100vh - {{navH}}px - {{botH}})">
+  <view class="order-top">
+    <view class="userInfo posCen-left">
+      <view class="fsc">
+        <view>{{curSite.name}}<text>{{telephone}}</text></view>
+        <navigator url='/pages/addAddress/index?id={{curSite.address_id}}'>修改 ></navigator>
+      </view>
+      <view>
+        {{curSite.address}}
+      </view>
+    </view>
+  </view>
+
+  <view class="order whiteBg">
+    <view class="order-header fsc solid-bot">
+      <view>配送时间</view>
+      <navigator url=''>预计：今日 12:00送达 ></navigator>
+    </view>
+    <view class="order-body">
+
+      <view class="order-item fdefc">
+        <image src="/images/product1.png"></image>
+        <view>
+          <view class="item-title">进口猪肋排</view>
+          <view class="fsc item-case">
+            <view>
+              <view>规格：500；种类：种类1</view>
+              <view>数量：×1</view>
+            </view>
+            <view>￥60.90</view>
+          </view>
+        </view>
+      </view>
+
+      <view class="order-item fdefc">
+        <image src="/images/product1.png"></image>
+        <view>
+          <view class="item-title">进口猪肋排</view>
+          <view class="item-case">
+            <view>
+              <view>数量：×1</view>
+            </view>
+            <view>￥60.90</view>
+          </view>
+        </view>
+      </view>
+
+      <view class="order-item fdefc">
+        <image src="/images/product1.png"></image>
+        <view>
+          <view class="item-title">进口猪肋排</view>
+          <view class="fsc item-case">
+            <view>
+              <view>规格：500；种类：种类1</view>
+              <view>数量：×1</view>
+            </view>
+            <view>￥60.90</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  
+    <view class="order-total clear">
+      <view class="fsc">
+        <view>商品金额</view>
+        <navigator url=''>￥80.91</navigator>
+      </view>
+      <view class="fsc">
+        <view>优惠券</view>
+        <navigator url=''>￥80.91</navigator>
+      </view>
+    </view>
+  </view>
+
+  <form class="order-remark whiteBg fdefc">
+    <view>订单备注</view>
+    <textarea placeholder='点击填写备注信息（最长输入50个字）' placeholder-style='color: #666;'></textarea>
+  </form> 
+
+
+  <view class="order-case whiteBg">
+    <view class="fsc">
+      <view>
+        <image src="/images/wallet.png" mode='aspectFit'></image>
+        会员钱包支付
+        <text>(余额:￥20.00)</text>
+      </view>
+      <view>余额不足</view>
+    </view>
+    <view class="fsc">
+    <view>
+      <image src="/images/WeChat.png" mode='aspectFit'></image>
+        微信支付
+      </view>
+      <icon type="success"></icon>
+    </view>
+  </view>
+
+</scroll-view>
+
+
+<view class="toBuy fixed-bot fsc">
+  <view class="price">
+    合计：<text>￥80.91</text>
+  </view>
+  <view class="sure">确认</view>
+</view>
+

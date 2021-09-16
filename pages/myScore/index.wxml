@@ -1,0 +1,32 @@
+<!-- navigator -->
+<nav-bar title="我的积分" backbtn="true"></nav-bar>
+<!-- /navigator -->
+
+<scroll-view scroll-y="true" class="box" style="margin-top: {{navH}}px; height: calc(100vh - {{navH}}px)">
+  <view class="score-top bg-full">
+    <view class="score-num">{{score}}</view>
+    <view class="score-txt">当前可用积分</view>
+    <view bindtap='toScore' class="border-box">立即兑换>></view>
+  </view>
+
+  <scroll-view scroll-y="true" class="score-form pad30" wx:if="{{points.length}}"
+    style="max-height: calc(100vh - {{navH}}px - {{topH}})">
+    <navigator url="/pages/orderDel/index?orderid={{item.order_id}}" class="fsc" wx:for="{{points}}" wx:key="p">
+      <view class="txt">
+        <view>{{item.description}}</view>
+        <text>{{item.creat_time}}</text>
+      </view>
+      <view>
+        <block wx:if="{{item.prefix==1}}">+</block>
+        <block wx:if="{{item.prefix==2}}">-</block>
+        {{item.points}}
+      </view>
+    </navigator>
+  </scroll-view>
+  <block wx:else>
+    <view class="empty" style="margin:30px auto;">
+      <image src="/images/empty.png" class="img-full"></image>
+      <view>您还没有兑换记录</view>
+    </view>
+  </block>
+</scroll-view>

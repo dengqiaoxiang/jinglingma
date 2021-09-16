@@ -1,0 +1,7 @@
+<!--component/header.wxml-->
+<view class="navigator" style='height:{{navH}}px;'>
+  <view class="arrow arrow-left"  bindtap='goback' wx:if="{{backbtn}}">
+    <view class="arrow-inner"></view>
+  </view>
+  <text>{{title}}</text>           
+</view>

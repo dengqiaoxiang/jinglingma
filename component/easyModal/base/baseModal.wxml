@@ -1,0 +1,29 @@
+
+  <view  animation="{{animationData}}"  hidden="{{!isShow}}"  class='modal'>
+
+     <view  data-type="mask"   class='modal-mask' ></view>
+     <!-- <view  data-type="mask"  catchtap='hideModal' class='modal-mask' ></view> -->
+  
+      <view  class='modal-layer' >
+
+          <!-- 头部 -->
+          <view >        
+            <slot name="header"></slot>             
+          </view>
+  
+          <view catchtap='hideModal'>
+            <slot name="close"></slot>                     
+          </view>
+
+          <!-- 内容区域 -->
+          <view >         
+              <slot name="body"></slot>                          
+          </view>
+
+          <!-- 尾部 -->
+          <view>
+            <slot name="footer"></slot>                     
+          </view>
+      </view>
+  </view>
+

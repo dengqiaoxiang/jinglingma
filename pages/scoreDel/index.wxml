@@ -1,0 +1,132 @@
+<!-- navigator -->
+<nav-bar title="积分兑换" backbtn="true"></nav-bar>
+<!-- /navigator -->
+<import src="../../wxParse/wxParse.wxml" />
+
+<scroll-view scroll-y="true" class="box" style="margin-top: {{navH}}px; height: calc(100vh - {{navH}}px - {{botH}})">
+  <!-- swiper -->
+  <view class="swiper whiteBg">
+    <view class="swiper-container">
+      <swiper class="swiper_box" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="true" bindchange="swiperchange">
+        <block wx:for="{{gallery}}" wx:key="{{key}}">
+          <swiper-item>
+            <image src="{{item.image}}" class="slide-image" class="img-full" />
+          </swiper-item>
+        </block>
+      </swiper>
+      <view class="fcc dots">
+        <block wx:for="{{gallery}}" wx:key="unique">
+          <view class="dot{{index == swiperCurrent ? ' active' : ''}}"></view>
+        </block>
+      </view>
+    </view>
+  </view>
+  <!-- /swiper -->
+
+  <!-- product-introz -->
+  <view class="whiteBg">
+    <view class="product-del pads30 solid-bot">
+      <view class="group clear">
+        <view class="del-title text-hidden fl">{{goods.name}}</view>
+      </view>
+
+      <view class="del-subtitle text-hidden">{{subtitle}}</view>
+      <view class="product-price fdefc">
+        {{goods.pay_points}}积分
+      </view>
+    </view>
+
+    <view class="fsc serve-item pads30" wx:if="{{keyword.length}}">
+      <view class="fcc" wx:for="{{keyword}}" wx:key="kw">
+        <image src="/images/serve-checked.png"></image>
+        {{item}}
+      </view>
+    </view>
+  </view>
+
+
+
+  <!-- del-intro -->
+  <view class="del-intro pads30 whiteBg">
+    <view class="fcc">
+      <view class="line"></view>
+      <view class="title">商品详情</view>
+      <view class="line"></view>
+    </view>
+
+    <view class="intros">
+      <view class="fdefc solid-bot" wx:if="{{attribute.length}}" wx:for="{{attribute}}" wx:key="attr">
+        <view class="label">{{item.name}}</view>
+        <view class="txt text-hidden">{{item.value}}</view>
+      </view>
+
+      <view wx:if="{{description}}">
+        <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+      </view>
+      <block wx:if="{{images_description.length}}">
+        <view class="fdefc solid-bot">
+          <view class="label">温馨提示</view>
+          <view class="txt text-hidden">【图片仅供参考，请以门店实际出货为准】</view>
+        </view>
+
+        <!-- 图片列表 -->
+        <block wx:for="{{images_description}}" wx:key="img">
+          <image src="{{item.image}}" class="del-img" mode='aspectFit'></image>
+        </block>
+      </block>
+    </view>
+  </view>
+
+</scroll-view>
+
+
+<view class="fixed-bot del-bot fcc">
+  <navigator url="/pages/cart/index" class="cart fcc">
+    <image src="/images/cart1.png"></image>
+    <view class="cartNum fcc" wx:if="{{totalNum}}">{{totalNum}}</view>
+  </navigator>
+  <view class="buy fcc">
+    <view class="toCart text-center" bindtap="tobuy">
+      立即兑换
+    </view>
+  </view>
+
+</view>
+
+
+<view class="show-popup" hidden="{{hideShopPopup}}">
+  <view class="popup-mask" bindtap="closePopupTap"></view>
+  <view class="popup-contents">
+    <view class="pop-goods-info">
+      <view class="pop-img-box">
+        <image src="{{selectImage}}" class="goods-thumbnail" />
+      </view>
+      <view class="pop-goods-des">
+        <view class="pop-goods-title">{{goodsDetail.basicInfo.name}}</view>
+        <view class="pop-goods-price">¥ {{price}}</view>
+      </view>
+      <view class="pop-goods-close" bindtap="closePopupTap"></view>
+    </view>
+    <view class="size-label-box" wx:if="{{spec.length}}">
+      <block wx:for="{{spec}}" wx:for-item="property" wx:for-index="idx" wx:key="id">
+        <view class="label">{{property.name}}</view>
+        <view class="label-item-box">
+          <view class="label-item {{spec_val.active ? 'active' : '' }}" wx:for="{{property.value}}" wx:for-item="spec_val" wx:key="id" bindtap="labelItemTap" data-specid="{{idx}}" data-specvaluename="{{spec_val.name}}" data-specvalueidx="{{index}}" data-specimage="{{spec_val.image}}">
+            {{spec_val.name}}
+          </view>
+        </view>
+      </block>
+    </view>
+    <view class="buy-num-box">
+      <view class="num-label">购买数量</view>
+      <view class="num-box">
+        <view class="num-jian {{buyNumber == buyNumMin ? 'hui': ''}}" bindtap="numJianTap">-</view>
+        <view class="num-input">
+          <input type="number" value="{{buyNumber}}" disabled/>
+        </view>
+        <view class="num-jia {{buyNumber== buyNumMax ? 'hui': ''}}" bindtap="numJiaTap">+</view>
+      </view>
+    </view>
+    <view class="popup-join-btn" wx:if="{{shopType =='tobuy'}}"  bindtap="buyNow"> 立即兑换</view>
+  </view>
+</view>

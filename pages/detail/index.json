@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "nav-bar": "/component/header/header",
+    "base-modal": "/component/easyModal/base/baseModal"
+  }
+}

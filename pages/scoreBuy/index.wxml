@@ -1,0 +1,70 @@
+<!-- navigator -->
+<nav-bar title="确认订单" backbtn="true"></nav-bar>
+
+<form bindsubmit="createOrder" report-submit="true"> 
+  <scroll-view scroll-y="true" class="box orders" style="margin-top: {{navH}}px; height: calc(100vh - {{navH}}px - {{botH}})">
+    <view class="order-top">
+      <view class="userInfo posCen-left" wx:if="{{shipping > 0}}">
+        <view class="add-address" hidden="{{curAddressData}}">
+          <navigator url='/pages/addAddress/index'>新增收货地址</navigator>
+        </view>
+        <view class="fsc" hidden="{{!curAddressData}}" bindtap="selectAddress">
+          <view>{{curAddressData.name}}<text>{{curAddressData.telephone}}</text></view>
+          <navigator url='/pages/addAddress/index?id={{siteId}}'>修改 ></navigator>
+        </view>
+        <view>
+          {{curAddressData.address}}
+        </view>
+      </view>
+    </view>
+
+    <view class="order whiteBg">
+      <view class="order-header fsc solid-bot">
+        <view>配送时间</view>
+        <navigator url=''>预计：今日 12:00送达 ></navigator>
+      </view>
+      <view class="order-body">
+
+  
+          <view class="order-item fdefc" wx:for="{{goodsList}}"  wx:key="{{index}}">
+            <image src="{{item.image}}"></image>
+            <view>
+              <view class="item-title">{{item.name}}</view>
+              <view class="fsc item-case">
+                <view>
+                  <view  wx:if="{{item.spec_name}}">规格： {{item.spec_name}}；</view>
+                  <view>数量：×{{item.number}}</view>
+                </view>
+                <view>积分{{item.number * item.price}}</view>
+              </view>
+            </view>
+          </view>
+      </view>
+    
+      <view class="order-total clear">
+        <view class="fsc">
+          <view>商品积分</view>
+          <view>积分: {{allGoodsPrice}}</view>
+        </view>
+        <view class="fsc" hidden="{{!hasNoCoupons}}">
+          <view>优惠</view>
+          <view><text>{{bonus_card}}</text> ￥{{youhuijine}}</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="order-remark whiteBg">
+      <view>订单备注</view>
+      <textarea placeholder='点击填写备注信息（最长输入50个字）' placeholder-style='color: #666;' name="remark"></textarea>
+    </view> 
+
+  </scroll-view>
+
+
+  <view class="toBuy fixed-bot fsc">
+    <view class="price">
+      合计：<text>积分: {{allGoodsPrice}}</text>
+    </view>
+    <button class="sure" formType="submit">确认</button>
+  </view>
+</form>

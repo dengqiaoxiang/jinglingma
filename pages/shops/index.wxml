@@ -1,0 +1,64 @@
+<!-- navigator -->
+<nav-bar title="切换门店" backbtn="true"></nav-bar>
+
+
+<scroll-view scroll-y="true"  class="container box" style="margin-top: {{navH}}px; height: calc(100vh - {{navH}}px)">
+  <!-- search -->
+  <view class="address-search fdefc border-box">
+    <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+      <view class="address fdefc">
+        <image src="/images/shop-site.png"></image>
+        <text>{{array[cityName]}}</text>
+        <image src="/images/angle-down.png"></image>
+      </view>
+    </picker>
+    <form bindsubmit="formSubmit" bindreset="formReset" class="search fdefc">
+      <image src="/images/claSearch-icon.png"></image>
+      <input maxlength="30" value="{{inputValue}}" bindinput='inputBind' bindconfirm='query' placeholder="请输入门店关键词" placeholder-style="color: #a1a1a1;"/>
+      <button bindtap='query' wx:if="{{inputValue}}">搜索</button>
+    </form>
+  </view>
+  <!-- /search -->
+
+
+  <!-- shops -->
+  <block wx:if="{{shops.length>0}}">
+    <view class="shops">
+      <block wx:if="{{inShops.length}}">
+        <view class="shop-range border-box" wx:for="{{shops}}" wx:key="item">
+          <navigator url="/pages/classify/index?shopid={{item.shop_id}}" class="shop-li border-box">
+            <view class="fdef">
+              {{item.shop_name}}
+              <view>送货上门</view>
+              <view>自提</view>
+            </view>
+            <view class="shop-delSite">{{item.shop_address}}</view>
+            <view class="shop-distant">{{distantArr[index]}}km</view>
+          </navigator>
+        </view>
+      </block>
+      <view class="out-range border-box" wx:if="{{outShops.length}}">
+        <view class="out-tip fcc">
+          <view class="line"></view>
+          <view class="txt">以下门店超出当前定位的配送范围</view>
+          <view class="line"></view>
+        </view>
+        <block wx:for="{{shops}}" wx:key="item">
+          <navigator url="/pages/classify/index?shopid={{item.shop_id}}" class="shop-li border-box">
+            <view class="fdef c">
+              {{item.shop_name}}
+              <view>自提</view>
+            </view>
+            <view class="shop-delSite">{{item.shop_address}}</view>
+            <view class="shop-distant"> {{distantArr[index]}}km</view>
+          </navigator>
+        </block>
+      </view>
+    </view>
+  </block>
+  <view wx:else class="empty">
+    <image src="/images/empty.png"  class="img-full"></image>
+    <view>当前地区门店，换个定位试试</view>
+  </view>
+  <!-- shops -->
+</scroll-view>

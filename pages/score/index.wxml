@@ -1,0 +1,50 @@
+<!-- navigator -->
+<nav-bar title="积分商城" backbtn=""></nav-bar>
+ 
+<!-- top -->
+  <view class="fixed-top fdefc shop-top" style="top: {{navH}}px">
+    <view class="fcc">
+      <image src="/images/score.png"></image>
+      <text>{{userInfo.points}}</text>积分
+    </view>
+    <navigator url="/pages/myScore/index?points={{userInfo.points}}" class="fcc">
+      <image src="/images/record.png"></image>
+      <text>兑换记录</text>
+    </navigator>
+  </view>
+  <!-- /top -->
+   <scroll-view scroll-y="true" class="box" bindscrolltolower="lower" lower-threshold="50" 
+    style="margin-top: {{navH}}px; height: calc(100vh - {{navH}}px - {{tabH}})">
+  <!-- main -->
+  <view class="shop-mian container">
+    <view class="sbanner">
+        <image src="/images/sbanner.png"></image>
+    </view>
+
+      <view class="shop-li">
+      
+        <view class="shop-li-title">
+          <view>实物礼品</view>  
+        </view>
+        <view class="shop-li-list fsw">
+          <block wx:for="{{lists}}" wx:key="key">
+          <navigator url="/pages/scoreDel/index?id={{item.goods_id}}">
+          <view class="shop-li-item">
+              <view class="fcc item-img">
+                <image  src="{{item.image}}"></image>
+              </view>
+              <view class="item-title">{{item.name}}</view>
+              <view  class="item-score">{{item.pay_points}}积分</view>
+          </view>
+          </navigator>
+          </block>
+        </view>
+      </view>
+      <view wx:if="{{nomore}}"  class="nomore text-center">没有更多了</view>
+      <view wx:else  class="nomore text-center">加载中....</view>
+    </view>
+  <!-- /main -->
+</scroll-view>
+
+<import src="/component/footer/footer.wxml"/>
+<template is="tabBar" data="{{tabBar:bindData.tabBar}}"/>

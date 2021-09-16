@@ -1,0 +1,87 @@
+<!-- navigator -->
+<nav-bar title="确认订单" backbtn="true"></nav-bar>
+
+<form bindsubmit="createOrder" report-submit="true"> 
+  <scroll-view scroll-y="true" class="box orders" style="margin-top: {{navH}}px; height: calc(100vh - {{navH}}px - {{botH}})">
+    <view class="order-top">
+      <view class="userInfo posCen-left" wx:if="{{curSite}}">
+        <view class="fsc">
+          <view>{{curSite.name}}<text>{{telephone}}</text></view>
+          <navigator url='/pages/addAddress/index?id={{siteId}}'>修改 ></navigator>
+        </view>
+        <view>
+          {{curSite.address}}
+        </view>
+      </view>
+    </view>
+
+    <view class="order whiteBg">
+      <view class="order-header fsc solid-bot">
+        <view>配送时间</view>
+        <navigator url=''>预计：今日 12:00送达 ></navigator>
+      </view>
+      <view class="order-body">
+        <block wx:for="{{cartsdata}}" wx:key="key" >
+  
+          <view class="order-item fdefc" wx:for="{{item.goods}}" wx:for-item="good" wx:key="g"  wx:if="{{good.goods_id}}">
+            <image src="{{good.image}}"></image>
+            <view>
+              <view class="item-title">{{good.name}}</view>
+              <view class="fsc item-case">
+                <view>
+                  <view>规格： {{good.spec_name}}；</view>
+                  <view>数量：×{{good.quantity}}</view>
+                </view>
+                <view>￥{{good.quantity * good.price}}</view>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+    
+      <view class="order-total clear" wx:for="{{cartsdata}}" wx:key="key">
+        <view class="fsc">
+          <view>商品金额</view>
+          <view>￥{{item.total_money}}</view>
+        </view>
+        <view class="fsc" wx:if="{{coupon}}">
+          <view>优惠</view>
+          <view><text>{{item.bonus_card}}</text> ￥{{coupon}}</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="order-remark whiteBg">
+      <view>订单备注</view>
+      <textarea placeholder='点击填写备注信息（最长输入50个字）' placeholder-style='color: #666;' name="remark"></textarea>
+    </view> 
+
+
+    <view class="order-case whiteBg">
+      <view class="fsc">
+        <view>
+          <image src="/images/wallet.png" mode='aspectFit'></image>
+          会员钱包支付
+          <text>(余额:￥20.00)</text>
+        </view>
+        <view>余额不足</view>
+      </view>
+      <view class="fsc">
+      <view>
+        <image src="/images/WeChat.png" mode='aspectFit'></image>
+          微信支付
+        </view>
+        <icon type="success"></icon>
+      </view>
+    </view>
+
+  </scroll-view>
+
+
+  <view class="toBuy fixed-bot fsc">
+    <view class="price">
+      合计：<text>￥{{allPrice}}</text>
+    </view>
+    <button class="sure" formType="submit">确认</button>
+  </view>
+</form>

@@ -1,0 +1,205 @@
+
+.group-img>image{
+  width: 250rpx;
+	height: 250rpx;
+	background-color: #f2dede;
+	border-radius: 6rpx;
+}
+
+.product-del{
+  width: 60%;
+  margin-left: 25rpx;
+}
+
+.del-title{
+  max-width: 400rpx;
+  margin-right: 48rpx;
+  font-size: 34rpx;
+}
+.groupNum{
+  width: 110rpx;
+	height: 30rpx;
+  line-height: 30rpx;
+  margin-top: 14rpx;
+  text-align: center;
+  font-size: 26rpx;
+	color: #fff;
+	background-color: #f03a58;
+	border-radius: 15px;
+}
+.buyNum{
+  font-size: 24rpx;
+	color: #666;
+}
+
+.del-subtitle{
+  font-size: 26rpx;
+	color: #666;
+}
+.product-price{
+  margin-top: 130rpx;
+  font-size: 36rpx;
+	color: #f03a58;
+}
+.product-price view:last-child{
+  margin-left: 50rpx;
+  font-size: 24rpx;
+	color: #333;
+  text-decoration: line-through;
+}
+
+.grouping{
+  color: #333;
+}
+.grouping>view{
+  margin-bottom: 30rpx;
+}
+.grouping>view:last-child{
+   margin-bottom: 0;
+}
+.grouping-title{
+  font-size: 34rpx;
+	color: #222222;
+}
+.grouping-title text{color: #f03a58;}
+.residue-time{
+  font-size: 30rpx;
+}
+.residue-time view{
+  width: 58rpx;
+	height: 32rpx;
+  margin: 0 11rpx;
+  line-height: 32rpx;
+  text-align: center;
+  font-size: 30rpx;
+	color: #fff;
+	background-color: #333;
+	border-radius: 4rpx;
+}
+.group-txt{
+   font-size: 24rpx;
+}
+.group-share{
+  width: 600rpx;
+	height: 60rpx;
+  margin-top: 10rpx;
+  font-size: 34rpx;
+	color: #ffffff;
+	background-color: #f03a58;
+	border-radius: 10rpx;
+}
+
+.peoples{
+  padding: 30rpx 30rpx 40rpx;
+}
+.peoples>view{
+  position: relative;
+  margin-right: 30rpx;
+}
+.peoples>view:last-child{  margin-right: 0;}
+
+.peoples image{
+  width: 110rpx;
+	height: 110rpx;
+	background-color: #f6f8fb;
+  border-radius: 50%;
+}
+.peoples>view>view{
+  position: absolute;
+  bottom: -10rpx;
+  width: 72rpx;
+	height: 30rpx;
+  margin-left: 20rpx;
+  font-size: 22rpx;
+	color: #fff;
+  text-align: center;
+	background-color: #f03a58;
+	border-radius: 20rpx;
+}
+.group-time{
+  font-size: 24rpx;
+	color: #444;
+}
+
+.groupRule{
+  padding: 23rpx 30rpx;
+  font-size: 24rpx;
+	color: #000;
+}
+
+.groupRule>view{
+  margin-right: 30rpx;
+  color: #666;
+}
+
+
+.serve-item>view{
+  font-size: 26rpx;
+	color: #666;
+}
+.serve-item image{
+  width: 26rpx;
+	height: 26rpx;
+  margin-right: 4rpx;
+}
+
+.del-intro .title{
+  margin: 0 20rpx;
+  font-size: 34rpx;
+	color: #61d96b;
+}
+
+
+.del-img{
+  width: 100%;
+  margin: 50rpx 0;
+}
+
+.del-bot{
+  width: 100%;
+	height: 98rpx;
+  background-color: #fff;
+}
+.del-bot>view{height: 100%;}
+.cart{
+  position: relative;
+  width: 26.77%;
+}
+.cart>image{
+  width: 64rpx;
+	height: 57rpx;
+}
+
+.cart .cartNum{
+  position: absolute;
+  top: 11rpx;
+  right: 48rpx;
+  width: 34rpx;
+	height: 34rpx;
+  font-size: 22rpx;
+  color: #fff;
+	background-color: #ffa42d;
+  border-radius: 50%;
+}
+.buy{
+  width: 77.33%;
+  font-size: 32rpx;
+	color: #fff;
+}
+.buy>view{
+  padding-top: 16rpx;
+}
+.buy>view>view{line-height: 1}
+
+.toCart{
+  width: 268rpx;
+	height: 88rpx;
+	background-color: #fd9294;
+	border-radius: 18rpx 0 0 18rpx;
+}
+.toGroup{
+  width: 268rpx;
+	height: 88rpx;
+	background-color: #f03a58;
+	border-radius: 0 18rpx 18rpx 0;
+}

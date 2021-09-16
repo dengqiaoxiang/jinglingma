@@ -1,0 +1,51 @@
+/**index.wxss**/
+page{background-color: #f6f6f6;}
+
+
+.address-list>view{
+  position: relative;
+  width: 100%;
+  margin: 30rpx 0;
+  background-color: #fff;
+}
+.address-list .site-msg{
+  padding: 30rpx;
+  border-bottom: 1px solid #ededed;
+}
+.address-li .address-info{font-size: 32rpx;}
+.address-li .user-info{
+  margin-top: 4rpx;
+  font-size: 26rpx;
+	color: #666;
+}
+.address-li .user-info text{
+  margin-left: 23rpx;
+}
+.operate{
+  padding: 16rpx 30rpx;
+  text-align: right;
+}
+.operate>view{
+  display: inline-block;
+  font-size: 30rpx;
+  line-height: 40rpx;
+  margin-right: 24rpx;
+}
+.operate>view image{
+  width: 26rpx;
+  height: 26rpx;
+  margin-right: 10rpx;
+}
+
+.add-site{
+  padding: 28rpx 0;
+  text-align: center;
+  font-size: 32rpx;
+  color: #61d96b;
+  border-top: 1px solid #ededed;
+}
+
+
+
+
+

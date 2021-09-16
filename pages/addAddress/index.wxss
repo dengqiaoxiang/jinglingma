@@ -1,0 +1,45 @@
+page{
+  background-color: #f6f6f6;
+}
+.navigator{
+  background: #fff;
+  color: #000;
+}
+.userInfo{display: block}
+
+.userInfo .fdefc{
+  padding: 30rpx;
+}
+.userInfo .whiteBg:first-child{margin: 30rpx 0;}
+
+.userInfo .fdefc>view:first-child{
+  width: 160rpx;
+  margin-right: 36rpx;
+  font-size: 32rpx;
+	color: #000;
+}
+.userInfo .fdefc>view:last-child{
+  width: 480rpx;
+  font-size: 28rpx;
+	color: #333;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.userInfo .picker{
+  font-size: 28rpx;
+	color: #666;
+  margin-right: 16rpx;
+}
+.userInfo .picker.hui{color: #333;}
+.userInfo .fdefc textarea{
+  width: 480rpx;
+  font-size: 28rpx;
+  height: 30rpx;
+}
+
+.userInfo .sex label{
+  display: inline-block;
+  width: 130rpx;
+}
+.userInfo .fdefc input{width: 100%;}

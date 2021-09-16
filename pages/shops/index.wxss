@@ -1,0 +1,114 @@
+/**index.wxss**/
+page{background-color: #f6f6f6;}
+.address-search{
+  width: 100%;
+  padding: 12rpx 30rpx;
+  margin-bottom: 30rpx;
+  background: #fff;
+  border-bottom: 1rpx solid #ededed;
+}
+.address-search>picker{width: 21%}
+.address>text{
+  margin: 0 10rpx;
+	font-size: 26rpx;
+  line-height: 1;
+}
+.address>image:first-child{
+  width: 22rpx;
+	height: 30rpx;
+}
+.address>image:last-child{
+  width: 18rpx;
+  height: 10rpx;
+}
+
+.search{
+  position: relative;
+  width: 78%;
+	height: 56rpx;
+	background-color: #f6f6f6;
+  padding-left: 56rpx;
+  margin-left: 10rpx;
+	border-radius: 10rpx;
+  box-sizing: border-box;
+}
+.search image{
+  position: absolute;
+  top: 16rpx;
+  left: 22rpx;
+  width: 24rpx;
+	height: 24rpx;
+}
+.search input{width: 491rpx;font-size: 26rpx;}
+.search button{
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100rpx;
+  height: 100%;
+  line-height: 56rpx;
+  padding: 0;
+  font-size: 26rpx;
+  color: #fff;
+  background: #61d96b;
+}
+
+
+.shops{
+  width: 100%;
+  background-color: #fff;
+  padding-bottom: 64rpx;
+}
+.shops>view.border-box{
+  width: 100%;
+  padding: 0 30rpx;
+}
+.shops .shop-li{
+  position: relative;
+  padding: 28rpx 0;
+  border-bottom: 1px solid #ededed;
+}
+.shop-li>view{
+  font-size: 32rpx;
+}
+.shop-li>view>view{
+  min-width: 80rpx;
+  padding: 0 16rpx;
+  height: 30rpx;
+  margin-left: 10rpx;
+  text-align: center;
+	border-radius: 30rpx;
+  color: #61d96b;
+  font-size: 22rpx;
+	border: solid 1px #61d96b;
+}
+.shop-li>view>view:first-child{
+   margin-left: 20rpx;
+}
+.shop-li .shop-delSite{
+  font-size: 26rpx;
+  color: #666;
+}
+.shop-li .shop-distant{
+  position: absolute;
+  top: 40rpx;
+  right: 30rpx;
+  font-size: 24rpx;
+}
+.out-range .out-tip{
+  padding: 28rpx;
+  font-size: 26rpx;
+  border-bottom: 1px solid #ededed;
+}
+.out-tip>view.txt{
+  padding: 0 20rpx;
+}
+.out-tip .line,.out-tip .line{
+  width: 47rpx;
+	height: 1px;
+	background-color: #c1c1c1;
+	border-radius: 1px;
+}
+
+.out-range .shop-li,.out-range .shop-li .shop-delSite{color: #999;}
+

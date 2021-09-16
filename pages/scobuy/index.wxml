@@ -1,0 +1,35 @@
+
+<!--index.wxml-->
+<view class="container">
+  <view class='page_row' bindtap="suo">
+    <view class="search">
+      <view class="df search_arr">
+        <icon class="searchcion" size='20' type='search'></icon>
+        <input class="" disabled placeholder="搜索" value="{{searchValue}}"/>
+      </view>
+    </view>
+    <!-- <view class='sousuo'>搜索</view> -->
+  </view>
+  <!-- <view class="userinfo">
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+  </view> -->
+  <!-- <block wx:for="{{contentlist}}" wx:for-item="item" wx:key="content_id" >
+  <navigator url="/pages/detail/detail?contentId={{item.content_id}}">
+   <view> {{item.content_id+"---"+item.title}} </view>
+   </navigator>
+   </block>-->
+</view> 
+ 
+<view class="list" wx:for="{{contentlist}}" wx:for-item="item" wx:key="content_id" >
+<navigator url="/pages/detail/detail?contentId={{item.content_id}}">
+     <view class="list-item list-item-middle">
+       <view class="f-b f-black">{{item.content_id}}</view>
+        <view class="f-gray">{{item.title}}</view>
+    </view>
+   <view class="list-item list-item-right">
+      <view class="f-gray f30"> {{item.release_date}}</view>
+    
+    </view>
+    </navigator>
+</view>

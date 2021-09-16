@@ -1,0 +1,37 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/cart/index",
+    "pages/site/index",
+    "pages/site-manage/index",
+    "pages/group/index",
+    "pages/groupDel/index",
+    "pages/groupBuy/index",
+    "pages/classify/index",
+    "pages/shops/index",
+    "pages/search/index",
+    "pages/score/index",
+    "pages/scoreDel/index",
+    "pages/scoreBuy/index",
+    "pages/userMsg/index",
+    "pages/order/index",
+    "pages/addAddress/index",
+    "pages/myScore/index",
+    "pages/orderDel/index",
+    "pages/joinGroup/index",
+    "pages/detail/index",
+    "pages/user/index",
+    "pages/myPintuan/index",
+    "pages/authorize/index"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  },
+  "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,147 @@
+<!-- navigator -->
+<nav-bar title="搜索" backbtn="true"></nav-bar>
+
+<!-- search -->
+<view class="search-box fixed-top fsc" style="top:{{navH}}px;">
+  <form bindsubmit="formSubmit" bindreset="formReset" class="search fdefc">
+    <image src="/images/claSearch-icon.png" class="searchBtn"></image>
+    <input confirm-type='search' placeholder="请输入商品名称" maxlength="30" placeholder-style="color: #939393;" value="{{inputValue}}" bindinput='inputBind' bindconfirm='query' />
+    <view class="close" wx:if="{{inputValue}}" bindtap="clearKw">
+      <image src="/images/search-close.png"></image>
+    </view>
+  </form>
+  <text bindtap='query'>搜索</text>
+</view>
+<!-- /search -->
+
+<!-- classify-right -->
+<scroll-view scroll-y="true" class="box" bindscrolltolower="lower" lower-threshold="50" style="margin-top: {{navH}}px; height: calc(100vh - {{navH}}px)">
+  <view style="height: 80rpx;"></view>
+
+  <block wx:if="{{!showList}}">
+    <view class="kwBox" wx:if="{{kwArr.length}}">
+      <view class="clear history">
+        <text class="fl">历史搜索</text>
+        <view class="fr" bindtap='clearStorageKw'>
+          <image src='/images/delect.png'></image>
+        </view>
+      </view>
+      <view class="clear kws">
+        <view class="fl" bindtap='historyKw' wx:for="{{kwArr}}" wx:key="{{key}}" data-text='{{item}}'>{{item}}</view>
+      </view>
+    </view>
+  </block>
+
+  <!-- 产品列表 -->
+  <view class="product-list" wx:else>
+    <block wx:if="{{arr.length}}">
+      <view class="product-item" wx:for="{{arr}}" wx:key="{{key}}">
+        <navigator url="/pages/detail/index?goodid={{item.goods_id}}&shopid={{shopMsg.shop_id}}" class="fdef">
+          <view class="product-img">
+            <image src="{{item.image}}"></image>
+          </view>
+          <view class="product-del">
+            <view class="del-title text-hidden">{{item.name}}</view>
+            <view class="del-subtitle text-hidden">{{item.detail.meta_description}}</view>
+            <view class="fdefc spec nthMar-last" wx:for="{{item.detail.spec}}" wx:key="{{key}}" wx:for-item="specItem">
+              <view>{{specItem.name}}</view>
+            </view>
+            <view class="product-price">￥{{item.price}}</view>
+          </view>
+        </navigator>
+        <block wx:if="{{!item.detail.spec.length}}">
+          <!--产品数量不为 0 -->
+          <block wx:for="{{goodsNum}}" wx:key="{{key}}" wx:for-item="numItem" wx:for-index="idx" wx:if="{{numItem.goods_id == item.goods_id}}">
+            <view class="product-num fsc" wx:if="{{numItem.number >= 1}}">
+              <image src="/images/reduce.png" bindtap='numminus' data-index="{{index}}" data-idx="{{idx}}" id="{{item.goods_id}}"></image>
+              <input disabled="{{true}}" type="number" value="{{numItem.number}}" bindinput='input_num' data-index="{{index}}"></input>
+              <image src="/images/add.png" bindtap='numadd' data-index="{{index}}" data-idx="{{idx}}" id="{{item.goods_id}}"></image>
+            </view>
+          </block>
+          <!--产品数量为 0 -->
+          <view class="product-num fsc">
+            <image src="/images/add.png" bindtap='showadd' data-index="{{index}}" id="{{item.goods_id}}"></image>
+          </view>
+
+        </block>
+        <block wx:else>
+          <view class="product-spec" catchtap='onShowModal' data-arr="{{item.detail.spec}}" data-index="{{index}}" id="{{item.goods_id}}">
+            选规格
+            <block wx:for="{{totalSun}}" wx:key="{{key}}" wx:for-item="toItem">
+              <view wx:if="{{toItem.shop_id == item.goods_id && toItem.total_number >= 1}}">
+                {{toItem.total_number}}
+              </view>
+            </block>
+          </view>
+        </block>
+      </view>
+      <view wx:if="{{nomore}}" class="nomore text-center">没有更多了</view>
+      <view wx:else class="nomore text-center">加载中....</view>
+    </block>
+    <block wx:else>
+      <view class="empty">
+        <image src="/images/empty.png" class="img-full"></image>
+        <view>没有相关产品</view>
+      </view>
+    </block>
+    <!-- /classify-right -->
+    <navigator class="cart fdefc" url="/pages/cart/index">
+      <view class="cart-img fcc">
+        <image src="/images/cart.png"></image>
+      </view>
+      <view class="cart-txt">
+        购物车
+      </view>
+      <view class="cart-num" wx:if="{{totalNum > 0}}" style="pointer-events: {{totalNum > 0 ? 'auto' : 'none'}}">
+        {{totalNum}}</view>
+    </navigator>
+  </view>
+
+</scroll-view>
+<!-- /classify-right -->
+
+<!-- /modal -->
+<base-modal id="baseModal">
+  <view slot="header" class="modal-header text-hidden">{{arr[modalIdx].name}}</view>
+  <view slot="close" bindtap='onHideModal' class="modal-close">
+    <image src="/images/x.png"></image>
+  </view>
+  <view slot="body" class='modal-body'>
+
+    <view class="modal-item">规格：</view>
+    <view class="modal-list clear">
+      <view wx:for="{{specArr}}" wx:key="{{key}}" id="{{item.id}}" data-idx="{{index}}" class="fl {{specActiveId == item.id ? 'active':''}}" bindtap='specTabClick'>
+        {{item.name}}
+      </view>
+    </view>
+
+  </view>
+  <view slot="footer" class='modal-footer modal-bot fsc'>
+    <view class="fcc modal-price">
+      ￥{{specPrice}}
+      <text>({{specArr[specIdx].name}}  <!-- {{kindArr[kindIdx].name}} -->)</text>
+    </view>
+
+    <block wx:for="{{goodsNum}}" wx:key="{{key}}" wx:for-item="numItem" wx:for-index="idx" wx:if="{{numItem.goods_id == modalId}}">
+      <block wx:if="{{numItem.sid == specArr[specIdx].id}}">
+        <view wx:if="{{numItem.number >= 1}}" class="modal-cart fcc posCen-top">
+          <image src="/images/mreduce.png" bindtap='numminus' data-index="{{modalIdx}}" data-idx="{{idx}}"></image>
+          <input type="number" value="{{numItem.number}}" disabled></input>
+          <image src="/images/madd.png" bindtap='numadd' data-index="{{modalIdx}}" data-idx="{{idx}}"></image>
+        </view>
+      </block>
+    </block>
+
+    <view wx:for="{{specArr}}" wx:key="key" class="addCart fcc posCen-top" bindtap='showadd' id="{{modalId}}" wx:if="{{item.id == specActiveId}}">
+      <image src="/images/madd.png"></image>
+    </view>
+
+
+  </view>
+</base-modal>
+
+<!-- 
+<base-modal id="clearKw"  bind:cancelEvent="_cancelEvent"  bind:confirmEvent="_confirmEventFirst"  >
+  <view slot="header" class="modal-header text-hidden">确定删除所有记录</view>
+  <view slot="footer"></view>
+</base-modal> -->

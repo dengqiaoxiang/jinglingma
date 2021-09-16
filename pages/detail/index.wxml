@@ -1,0 +1,147 @@
+<!-- navigator -->
+<nav-bar title="商品详情" backbtn="true"></nav-bar>
+<import src="../../wxParse/wxParse.wxml" />
+
+
+<scroll-view scroll-y="true" class="box" style="margin-top: {{navH}}px; height: calc(100vh - {{navH}}px - {{botH}})">
+
+  <!-- swiper -->
+  <view class="swiper whiteBg">
+    <view class="swiper-container">
+      <swiper class="swiper_box" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="true" bindchange="swiperchange">
+        <block wx:for="{{gallery}}" wx:key="{{key}}">
+          <swiper-item>
+            <image src="{{item.image}}" class="slide-image" class="img-full" />
+          </swiper-item>
+        </block>
+      </swiper>
+      <view class="fcc dots">
+        <block wx:for="{{gallery}}" wx:key="unique">
+          <view class="dot{{index == swiperCurrent ? ' active' : ''}}"></view>
+        </block>
+      </view>
+    </view>
+  </view>
+  <!-- /swiper -->
+
+  <!-- product-introz -->
+  <view class="whiteBg">
+    <view class="product-del pads30 solid-bot">
+      <view class="del-title text-hidden">{{goods.name}}</view>
+      <view class="del-subtitle text-hidden">{{subtitle}}</view>
+      <view class="product-item">
+        <view class="product-price">￥{{selectSizePrice}}</view>
+        <block wx:if="{{!specArr.length}}">
+          <!--产品数量不为 0 -->
+          <view class="product-num fsc" wx:if="{{goodinfo.number >= 1}}">
+            <image src="/images/reduce.png" bindtap='numminus' data-id="{{goodinfo.goods_id}}"></image>
+            <input disabled="{{true}}" type="number" value="{{goodinfo.number}}"></input>
+            <image src="/images/add.png" bindtap='numadd' data-id="{{goodinfo.goods_id}}"></image>
+          </view>
+          <!--产品数量为 0 -->
+          <view class="product-num toCart" bindtap='showadd' wx:else>
+            + 加入购物车
+          </view>
+
+        </block>
+        <block wx:else>
+          <view class="product-spec" catchtap='onShowModal' data-arr="{{item.spec}}" data-index="{{index}}" id="{{item.goods_id}}">
+            选规格
+            <view wx:if="{{totalSun[0].total_number >= 1}}">
+              {{totalSun[0].total_number}}
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <view class="fsc serve-item pads30" wx:if="{{keyword.length}}">
+      <view class="fcc" wx:for="{{keyword}}" wx:key="kw">
+        <image src="/images/serve-checked.png"></image>
+        {{item}}
+      </view>
+    </view>
+  </view>
+
+
+  <!-- del-intro -->
+  <view class="del-intro pads30">
+    <view class="fcc">
+      <view class="line"></view>
+      <view class="title">商品详情</view>
+      <view class="line"></view>
+    </view>
+
+    <view class="intros">
+      <view class="fdefc solid-bot" wx:if="{{attribute.length}}" wx:for="{{attribute}}" wx:key="attr">
+        <view class="label">{{item.name}}</view>
+        <view class="txt text-hidden">{{item.value}}</view>
+      </view>
+
+      <view wx:if="{{description}}">
+        <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+      </view>
+
+      <block wx:if="{{images_des.length}}">
+        <view class="fdefc solid-bot">
+          <view class="label">温馨提示</view>
+          <view class="txt text-hidden">【图片仅供参考，请以门店实际出货为准】</view>
+        </view>
+
+        <!-- 图片列表 -->
+        <block wx:for="{{images_des}}" wx:key="img">
+          <image src="{{item.image}}" class="del-img" mode='aspectFit'></image>
+        </block>
+      </block>
+    </view>
+  </view>
+
+</scroll-view>
+
+<view class="fixed-bot del-bot fcc">
+  <view url='/pages/cart/index' class="cart fcc">
+    <image src="/images/cart1.png"></image>
+    <view class="cartNum fcc" wx:if="{{totalNum}}">{{totalNum}}</view>
+  </view>
+  <navigator url='/pages/cart/index' class="botToCart fcc" bindtap="botToCart">
+    去购物车
+  </navigator>
+</view>
+
+
+<!-- spec modal -->
+<base-modal id="baseModal">
+  <view slot="header" class="modal-header text-hidden">{{arr[modalIdx].name}}</view>
+  <view slot="close" class="modal-close">
+    <image src="/images/x.png"></image>
+  </view>
+  <view slot="body" class='modal-body'>
+
+    <view class="modal-item">规格：</view>
+    <view class="modal-list clear">
+      <view wx:for="{{specArr}}" wx:key="{{key}}" data-id="{{item.id}}" data-idx="{{index}}" class="fl {{specActiveId == item.id ? 'active':''}}" bindtap='specTab'>
+        {{item.name}}
+      </view>
+    </view>
+
+  </view>
+  <view slot="footer" class='modal-footer modal-bot fsc'>
+    <view class="fcc modal-price">
+      ￥{{selectSizePrice}}
+      <text>({{specArr[specIdx].name}}  <!-- {{kindArr[kindIdx].name}} -->)</text>
+    </view>
+
+
+    <view wx:if="{{goodinfo.sid == specActiveId && goodinfo.number>0}}" class="modal-cart fcc posCen-top">
+      <image src="/images/mreduce.png" bindtap='numminus'></image>
+      <input type="number" value="{{goodinfo.number}}" disabled></input>
+      <image src="/images/madd.png" bindtap='numadd'></image>
+    </view>
+
+    <view class="toCart" bindtap='showadd' data-index="{{specIdx}}" wx:else>
+      + 加入购物车
+    </view>
+
+
+  </view>
+</base-modal>

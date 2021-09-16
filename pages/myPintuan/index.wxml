@@ -1,0 +1,51 @@
+<!-- navigator -->
+<nav-bar title="我的拼团" backbtn="true"></nav-bar>
+
+<scroll-view scroll-y="true" class="orders border-box" style="margin-top: {{navH}}px; height: calc(100vh - {{navH}}px)">
+    <view class="status-box">
+        <view bindtap="statusTap" class="status-label {{item.id == currentType ? 'active' : ''}}" wx:for-items="{{statusType}}" wx:key="{{index}}" data-index="{{item.id}}">
+            {{item.name}}
+            <view class="{{tabClass[index]}}"></view>
+        </view>
+    </view>
+    <view class="empty" hidden="{{orderList ? true : false}}">
+      <image src="/images/empty.png" class="img-full"></image>
+      <view>您还没有相关订单哦</view>
+    </view>
+    <view class="order-list" hidden="{{orderList ? false : true}}">
+        <view class="a-order" wx:for-items="{{orderList}}" wx:key="{{index}}">
+            <view class="order-date">
+                <view class="date-box">下单时间：{{item.dateAdd}}</view>
+                <view class="status {{(item.status==-1 || item.status==4) ? '':'red'}}">{{item.statusStr}}</view>
+            </view>
+            <view class="goods-info" bindtap="orderDetail" data-id="{{item.id}}">
+                <view class="goods-des">
+                   <view>订单号:{{item.orderNumber}} </view>
+                   <view wx:if="{{item.remark && item.remark != ''}}">备注： {{item.remark}}</view>
+                </view>
+            </view>
+            <view bindtap="orderDetail" data-orderid="{{item.id}}">
+                <scroll-view class="goods-img-container" scroll-x="true">
+                    <view class="img-box" wx:for-items="{{goodsMap[item.id].list}}" wx:key="{{index}}" wx:for-item="goods">
+                        <image src="{{goods.image}}" class="goods-img"></image>
+                    </view>
+                </scroll-view>
+            </view>
+            <view class="price-box">
+            
+                <view class="total-price">合计：¥ {{item.amountReal}}</view>             
+                
+                <view class="btn green" wx:if="{{item.pintuan_status=='success'}}">拼团成功</view>
+
+                <view class="btn green" bindtap="refund" data-id="{{item.id}}" wx:if="{{item.pintuan_status=='fail'&&item.status==1}}">立即退款</view>
+
+                <view class="btn red" wx:if="{{item.pintuan_status=='fail'}}">拼团失败</view>
+
+                <view class="btn green" wx:if="{{item.pintuan_status=='pt_ing'}}">拼团中</view>
+
+                <view class="btn border" bindtap="pintuanInfo" data-id="{{item.id}}">拼团详情</view>        
+            </view>  
+        </view>
+
+    </view>
+</scroll-view>

@@ -1,0 +1,110 @@
+@import "/component/footer/footer.wxss";
+.top{
+  padding: 8rpx 30rpx;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+}
+.search{
+  width: 100%;
+  padding: 8rpx 30rpx 12rpx;
+}
+.search view{
+  position: relative;
+  width: 690rpx;
+  height: 60rpx;
+  padding-left: 57rpx;
+  box-sizing: border-box;
+  background: linear-gradient(90deg, #45bd4f 0%, #07b594 100%), 
+	  linear-gradient(#000000, #000000);
+  border-radius: 30rpx;
+}
+.search image{
+  position: absolute;
+  top: 16rpx;
+  left: 22rpx;
+  width: 28rpx;
+  height: 28rpx;
+}
+.search text{
+  margin-left: 7rpx;
+  font-size: 32rpx;
+  color: #fff;
+  line-height: 1
+}
+
+.swiper-container{
+  position: relative; 
+  width: 100%;
+  height: 354rpx;
+  padding: 14rpx 30rpx 40rpx;
+}
+.swiper-container{
+  width: 690rpx;
+  height: 355rpx;
+}
+.swiper-container>swiper{height: 100%}
+.swiper-container  image{
+  width: 100%;
+  height: 100%;
+  border-radius: 29rpx;
+}
+.dots{
+  position: absolute;
+  bottom: 47rpx;
+  width: 690rpx;
+}
+.dots .dot{
+  width: 28rpx;
+	height: 5rpx;
+  margin-right: 7rpx;
+	background-color: #ffffff;
+	border-radius: 3rpx;
+	opacity: .7;
+}
+.dots .dot:last-child{margin-right: 0}
+.dots .dot.active{	opacity: 1;}
+.slogan-img{
+  width: 120rpx;
+	height: 120rpx;
+  padding: 5rpx;
+  margin-left: 60rpx;
+  box-shadow: 0 8rpx 14rpx 0 	rgba(14, 197, 151, 0.31);
+  background: linear-gradient(90deg, 	#61d96b 0%, 	#04f0c3 100%);
+  border-radius: 50%;
+}
+.slogan-img image{width: 100%;height:100%;border-radius: 50%;}
+.slogan-txt{
+  margin-left: 30rpx;
+  font-size: 36rpx;
+}
+
+/* links */
+.links{
+  margin-top: 30rpx;
+}
+.links .link-item{
+  height: 126rpx;
+  border-bottom: 1rpx solid #cacaca;
+}
+.links .link-item:first-child{
+   border-top: 1rpx solid #cacaca;
+}
+.links .link-img{
+  width: 38rpx;
+  margin-left: 60rpx;
+  margin-right: 20rpx;
+}
+.links .link-img image{
+  display: block;
+  max-width: 100%;
+  max-height:  60rpx;
+}
+.links .link-txt {
+  font-size: 22rpx;
+  color: #999;
+}
+.links .link-txt .txt-b{
+  font-size: 34rpx;
+  color: #000;
+}
+

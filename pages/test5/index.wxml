@@ -1,0 +1,25 @@
+  <view class="top">banner</view>
+  <scroll-view scroll-y="{{true}}" bindscrolltolower="lower" lower-threshold="50" class="pull-down-load">
+        <view class="bill">
+            <view class="bill-title">
+                流水
+            </view>
+            <view class="no-data" wx:if="{{!data.record.rows}}">
+                当前无流水记录~
+            </view>
+            <view wx:for="{{datalist}}" wx:key="itemid" class="bill-list">
+                <view class="bill-list-left">
+                    <view class="recommend-text">
+                        {{item.text}}
+                    </view>
+                    <view class="recommend-date">
+                        {{item.time}}
+                    </view>
+                </view>
+                <view class="bill-list-right">
+                    {{item.amount}}
+                </view>
+            </view>
+            <view wx:if="{{nomore}}" class="no-more">没有更多了~</view>
+        </view>
+    </scroll-view>

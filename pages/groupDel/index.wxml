@@ -1,0 +1,206 @@
+<!-- navigator -->
+<nav-bar title="拼团详情" backbtn="true"></nav-bar>
+<!-- /navigator -->
+<import src="../../wxParse/wxParse.wxml" />
+
+<scroll-view scroll-y="true" class="box" style="margin-top: {{navH}}px; height: calc(100vh - {{navH}}px - {{botH}})">
+  <!-- swiper -->
+  <view class="swiper whiteBg">
+    <view class="swiper-container">
+      <swiper class="swiper_box" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="true" bindchange="swiperchange">
+        <block wx:for="{{gallery}}" wx:key="{{key}}">
+          <swiper-item>
+            <image src="{{item.image}}" class="slide-image" class="img-full" />
+          </swiper-item>
+        </block>
+      </swiper>
+      <view class="fcc dots">
+        <block wx:for="{{gallery}}" wx:key="unique">
+          <view class="dot{{index == swiperCurrent ? ' active' : ''}}"></view>
+        </block>
+      </view>
+    </view>
+  </view>
+  <!-- /swiper -->
+
+  <!-- product-introz -->
+  <view class="whiteBg">
+    <view class="product-del pads30 solid-bot">
+      <view class="group clear">
+        <view class="del-title text-hidden fl">{{goods.name}}</view>
+        <view class="groupNum fl">{{goods.pt_tuan_num}}人团</view>
+        <view class="buyNum fr">{{goods.sale_count}}人已团</view>
+      </view>
+
+      <view class="del-subtitle text-hidden">{{subtitle}}</view>
+      <view class="product-price fdefc">
+        <view>￥{{goods.pt_price}}</view>
+        <view>￥{{goods.price}}</view>
+      </view>
+    </view>
+
+    <view class="fsc serve-item pads30" wx:if="{{keyword.length}}">
+      <view class="fcc" wx:for="{{keyword}}" wx:key="kw">
+        <image src="/images/serve-checked.png"></image>
+        {{item}}
+      </view>
+    </view>
+  </view>
+
+
+  <!-- grouping -->
+  <view class="grouping pads30 whiteBg" wx:if="{{pt_list.length}}">
+    <view class="grouping-title solid-bot">可直接参TA们的团</view>
+
+
+
+    <view class="grouping-list">
+      <view class="grouping-li fsc" wx:for-items="{{pt_list}}" wx:key="{{index}}">
+        <view class="fcc">
+          <image src="{{item.head_pic}}"></image>
+          <text class="txt">{{item.username}}</text> 
+        </view>
+        <view class="fcc">
+          <view class="time">
+            <view>仅差{{item.need_num}}人成团</view>
+            <view>距结束 {{wxTimerList[index].wxTimer}}</view>
+          </view>
+          <navigator url="/pages/joinGroup/index?order_id={{item.order_id}}">立即参团</navigator>
+        </view>
+
+      </view>
+      
+    </view>
+  </view>
+  <!-- <navigator url="/pages/joinGroup/index?order_id=67">立即参团</navigator> -->
+
+  <view class="groupRule pads30 clear" catchtap='onShowModal'>
+    <view class="fl">拼团规则</view>
+    <view class="fl">开团或参团-人满发货-人不满退款</view>
+    <image class="arrowr fr" src="/images/arrowr.png"></image>
+  </view>
+
+
+  <!-- del-intro -->
+  <view class="del-intro pads30 whiteBg">
+    <view class="fcc">
+      <view class="line"></view>
+      <view class="title">商品详情</view>
+      <view class="line"></view>
+    </view>
+
+    <view class="intros">
+      <view class="fdefc solid-bot" wx:if="{{attribute.length}}" wx:for="{{attribute}}" wx:key="attr">
+        <view class="label">{{item.name}}</view>
+        <view class="txt text-hidden">{{item.value}}</view>
+      </view>
+
+      <view wx:if="{{description}}">
+        <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+      </view>
+
+      <block wx:if="{{images_description.length}}">
+        <view class="fdefc solid-bot">
+          <view class="label">温馨提示</view>
+          <view class="txt text-hidden">【图片仅供参考，请以门店实际出货为准】</view>
+        </view>
+
+        <!-- 图片列表 -->
+        <block wx:for="{{images_description}}" wx:key="img">
+          <image src="{{item.image}}" class="del-img" mode='aspectFit'></image>
+        </block>
+      </block>
+    </view>
+  </view>
+
+</scroll-view>
+
+
+<view class="fixed-bot del-bot fcc">
+  <navigator url='/pages/cart/index' class="cart fcc">
+    <image src="/images/cart1.png"></image>
+    <view class="cartNum fcc"  wx:if="{{totalNum>0}}">{{totalNum}}</view>
+  </navigator>
+  <view class="buy fcc">
+    <view class="toCart text-center" bindtap="toYj">
+      <view>￥{{goods.price}}</view>
+      <view>立即购买</view>
+    </view>
+    <view class="toGroup text-center" bindtap="toKt">
+      <view>￥{{goods.pt_price}}</view>
+      <view>立即开团</view>
+    </view>
+  </view>
+
+</view>
+
+<!-- modal -->
+<base-modal id="baseModal">
+  <view slot="header" class="modal-header pads30 solid-bot">拼团规则</view>
+  <view slot="close" class="modal-close">
+    <image src="/images/x.png"></image>
+  </view>
+  <view slot="body" class='modal-body rule-txt'>
+    <view>
+      1、爆款团无用户限制，人人均可参团，成团后在24小时内发货。
+    </view>
+    <view>
+      2、拼团成功，则该团成员均可获得这一份商品，中奖者为团内所有成员。
+    </view>
+    <view>
+      3、拼团有效期为24小时，发起拼团24小时后因人数不足将导致拼团失败，则自动退回团购金。
+    </view>
+    <view>
+      4、同一拼团商品针对同一用户不限购，活动商品限制库存，不同商品限购数量不同。
+    </view>
+    <view>
+      5、每个用户不限开团次数，以最后一个拼团成团为时间节点，剩余团在活动结束后，全部退还团购金。
+    </view>
+    <view>
+      6、为保证拼团活动的公平公正性，切忌使用虚假信息拼团，精灵妈有权取消订单并退回团购金。
+    </view>
+  </view>
+</base-modal>
+
+<view class="show-popup" hidden="{{hideShopPopup}}">
+  <view class="popup-mask" bindtap="closePopupTap"></view>
+  <view class="popup-contents">
+    <view class="pop-goods-info">
+      <view class="pop-img-box">
+        <image src="{{selectImage}}" class="goods-thumbnail" />
+      </view>
+      <view class="pop-goods-des">
+        <view class="pop-goods-title">{{goodsDetail.basicInfo.name}}</view>
+        <view class="pop-goods-price">¥ {{price}}</view>
+      </view>
+      <view class="pop-goods-close" bindtap="closePopupTap"></view>
+    </view>
+    <view class="size-label-box">
+      <block wx:for="{{spec}}" wx:for-item="property" wx:for-index="idx" wx:key="id">
+        <view class="label">{{property.name}}</view>
+        <view class="label-item-box">
+        
+          <view class="label-item {{spec_val.active ? 'active' : '' }}" wx:for="{{property.value}}" wx:for-item="spec_val" wx:key="id" bindtap="labelItemTap" data-specid="{{idx}}" data-specvaluename="{{spec_val.name}}" data-specvalueidx="{{index}}" data-specimage="{{spec_val.image}}">
+            {{spec_val.name}}
+          </view>
+        </view>
+      </block>
+    </view>
+    <view class="buy-num-box">
+      <view class="num-label">购买数量</view>
+      <view class="num-box">
+        <view class="num-jian {{buyNumber == buyNumMin ? 'hui': ''}}" bindtap="numJianTap">-</view>
+        <view class="num-input">
+          <input type="number" value="{{buyNumber}}" disabled/>
+        </view>
+        <view class="num-jia {{buyNumber== buyNumMax ? 'hui': ''}}" bindtap="numJiaTap">+</view>
+      </view>
+    </view>
+    <view class="popup-join-btn" wx:if="{{shopType =='kt'}}" bindtap="buy">
+      开团购买
+    </view>
+    <view class="popup-join-btn" wx:if="{{shopType =='yj'}}" bindtap="buy">
+      原价购买
+    </view>
+  </view>
+</view>

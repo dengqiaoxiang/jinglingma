@@ -1,0 +1,10 @@
+
+<base-modal id="baseModal"   modalSize="{{modalSize}}"  animated="{{animated}}"  backdrop="{{backdrop}}">
+    <view slot="header" class='modal-header'>
+        <text>{{title}}</text>
+    </view>
+    <image class="modal-close" src="/images/x.png" bindtap="hideModal"></image>
+    <view slot="body" class='modal-body'>
+        <slot></slot>
+    </view>
+</base-modal>

@@ -1,0 +1,51 @@
+<!-- navigator -->
+<nav-bar title="拼团" backbtn=""></nav-bar>
+
+
+<scroll-view scroll-y="true" class="box" bindscrolltolower="lower" lower-threshold="50"
+  style="margin-top: {{navH}}px; height: calc(100vh - {{navH}}px - {{tabH}})">
+  <block wx:if="{{lists.length}}">
+    <!-- search -->
+    <view class="address-search fixed-top fcc" style="top: {{navH}}px;">
+      <view class="address fcc">
+        提货门店：
+        <text>佛山狮山灯饰城店</text>
+        <image src="/images/angle-icon.png"></image>
+      </view>
+      <navigator url="/pages/search/index" class="search fdefc">
+        <image src="/images/claSearch-icon.png"></image>
+        <text>搜索</text>
+      </navigator>
+    </view>
+    <!-- /search -->
+
+    <!-- group booking -->
+    <view class="group-list container">
+      <block wx:for="{{lists}}" wx:key="key">
+        <navigator url="/pages/groupDel/index?id={{item.goods_id}}" class="group-li bg-full-x" style="background-image: url(https://img.foshanhaozhan.com/wxapp/groupLi-bg.png)">
+          <view class="group-tip">{{item.pt_tuan_num}}人团</view>
+          <view class="group-img fcc">
+            <image src="{{item.image}}"></image>
+          </view>
+          <view class="group-title border-box text-hidden">
+            {{item.name}}
+          </view>
+          <view class="group-price">
+            <text>￥{{item.pt_price}}</text>
+            <text>￥{{item.price}}</text>
+          </view>
+          <view class="group-num">
+            <button>拼团</button>
+            <view class="text-center">·{{item.sale_count}}人已团</view>
+          </view>
+        </navigator>
+      </block>
+    </view>
+  </block>
+  <view class="nopintuan text-center" wx:else>
+    现在还没有可以拼团的产品
+  </view>
+</scroll-view>
+
+<import src="/component/footer/footer.wxml" />
+<template is="tabBar" data="{{tabBar:bindData.tabBar}}" />

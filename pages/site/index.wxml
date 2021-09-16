@@ -1,0 +1,81 @@
+<!-- navigator -->
+<nav-bar title="地址管理" backbtn="true"></nav-bar>
+
+  <!-- search -->
+  <view class="address-search fdefc border-box" style="top: {{navH}}px">
+    <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+      <view class="address fdefc">
+        <image src="/images/shop-site.png"></image>
+        <text>{{array[cityName]}}</text>
+        <image src="/images/angle-down.png"></image>
+      </view>
+    </picker>
+    <form bindsubmit="formSubmit" bindreset="formReset" class="search fdefc">
+      <image src="/images/claSearch-icon.png"></image>
+      <input maxlength="30" value="{{inputValue}}" bindinput='inputBind' bindconfirm='query' placeholder="请输入地址名称" placeholder-style="color: #a1a1a1;"/>
+      <image src="/images/search-close.png" class="close" wx:if="{{inputValue}}" bindtap="clearKw"></image>
+    </form>
+  </view>
+
+<scroll-view scroll-y="true" class="box" style="margin-top: {{navH}}px; height: calc(100vh - {{navH}}px - {{botH}})">
+  <view style="height: 80rpx;"></view>
+  <block wx:if="{{inputValue}}">
+    <view class="near border-box white-bg" wx:if="{{searchArr.length>0}}">
+      <view wx:for="{{searchArr}}" wx:key="{{key}}" wx:if="{{item.type==0}}">
+        {{item.category}}
+        <view>{{item.address}}</view>
+      </view>
+    </view>
+    <block wx:else>
+      <view  class="empty">
+        <image src="/images/empty.png"  class="img-full"></image>
+        <view>没有相关位置</view>
+      </view>
+    </block>
+  </block>
+  <block wx:else>
+    <!-- address -->
+    <view class="item fdefc">当前地址</view>
+    <view class="current border-box fsc">
+      <view class="text-hidden">
+        <block wx:if="{{currentSite}}">
+          {{currentSite}}
+        </block>
+        <block wx:else>
+          定位中...
+        </block>
+      </view>
+      <view class="fcc"  bindtap='resetSite'>
+        <image src="/images/coordinate.png"></image>
+          重新定位
+      </view>
+    </view>
+
+    <view class="item fdefc"><image src="/images/home.png"></image>  我的收货地址</view>
+    <view class="address-list border-box white-bg">
+      <view class="address-li"  wx:for="{{siteArr}}" wx:key="{{key}}">
+        <view id="{{item.address_id}}" bindtap='checked'>
+          <view class="address-info">{{item.address}}</view>
+          <view class="user-info fdefc">
+            {{item.name}}
+            <text> {{item.telephone}}</text>
+          </view>
+        </view>
+        <image class="check" src="/images/checked.png" wx:if="{{siteId == item.address_id}}"></image>
+      </view>
+    </view>
+
+    <view class="item fdefc">附近地址</view>
+    <view class="near border-box white-bg" >
+      
+      <view wx:for="{{nearSite}}" wx:key="{{key}}" wx:if="{{item.type==0&&index<5}}">
+        {{item.category}}
+        <view>{{item.address}}</view>
+      </view>
+    </view>
+  </block>
+</scroll-view>
+<navigator url="/pages/addAddress/index" class="add-site fixed-bot whiteBg">
+  新增地址 +
+</navigator>
+
